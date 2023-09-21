@@ -81,7 +81,9 @@ export const login=createAsyncThunk(
     async(userData,thunkAPI)=>{
         try {
             const data=await authService.login(userData)
-            if(data.access){
+            if(!data.access){
+                console.log('No ACCESS')
+            }else{
                 localStorage.setItem('access',data.access)
                 console.log(load())
             }
