@@ -53,11 +53,12 @@ INSTALLED_APPS = [
 
 CORS_ORIGIN_WHITELIST = ( 'http://127.0.0.1:8000','http://localhost:5173' )
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://localhost:8080',
-# ]
-# CSRF_WHITELIST_ORIGINS = ['localhost:8000','localhost:8080']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://localhost:5173',
+]
+
+# CSRF_WHITELIST_ORIGINS = ['localhost:8000','http://localhost:5173']
 
 # CSRF_COOKIE_NAME='X-CSRFToken'
 # CSRF_COOKIE_AGE=86400
@@ -69,9 +70,9 @@ CORS_ORIGIN_WHITELIST = ( 'http://127.0.0.1:8000','http://localhost:5173' )
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -207,7 +208,7 @@ REST_FRAMEWORK = {
 
 # JWT config
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('JWT',"Bearer "),
    'ACCESS_TOKEN_LIFETIME':timedelta(minutes=180),
    'REFRESH_TOKEN_LIFETIME':timedelta(days=60),
    "SIGNING_KEY":'q&d{E34iApUI`My(LKdA)FS/Nq6d&^',
