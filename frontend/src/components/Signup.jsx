@@ -110,18 +110,6 @@ const Signup = () => {
 		dispatch(signup(userData)).then((e) => {
 			console.log(e);
 		});
-		console.log(
-			email,
-			password,
-			re_password,
-			full_name,
-			domain,
-			branch,
-			preferred_language,
-			level_of_understanding_of_preferred_language,
-			university,
-			academic_year
-		);
 	};
 
 	const onChange = (e) =>

@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     'djoser',
     'account',
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'api',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 CORS_ORIGIN_WHITELIST = ( 'http://127.0.0.1:8000','http://localhost:5173' )
@@ -199,7 +202,7 @@ DJOSER = {
 # rest framework setup
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -209,7 +212,7 @@ REST_FRAMEWORK = {
 # JWT config
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',"Bearer "),
-   'ACCESS_TOKEN_LIFETIME':timedelta(minutes=180),
+   'ACCESS_TOKEN_LIFETIME':timedelta(minutes=1),
    'REFRESH_TOKEN_LIFETIME':timedelta(days=60),
    "SIGNING_KEY":'q&d{E34iApUI`My(LKdA)FS/Nq6d&^',
     'AUTH_HEADER_NAME':"HTTP_AUTHORIZATION",
@@ -218,3 +221,14 @@ SIMPLE_JWT = {
 
 
 CORS_ALLOW_ALL_ORIGINS=True
+
+
+# config to manage media files:
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('API_KEY'),
+    'API_SECRET': env('API_SECRET')
+}
+
+MEDIA_URL = '/media/' 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
