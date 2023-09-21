@@ -8,12 +8,11 @@ import Homes from "./components/Homes";
 import ResetPassword from "./components/ResetPassword";
 import ResetPasswordConfirm from "./components/ResetPasswordConfirm";
 
-
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Homes />,
+      element: <Layout />,
     },
     {
       path: "/signup",
@@ -39,9 +38,11 @@ function App() {
 
   return (
     <>
-        <Layout>
-          <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <Layout >
+          <Homes/>
         </Layout>
+      </RouterProvider>
     </>
   );
 }
