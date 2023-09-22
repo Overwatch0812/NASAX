@@ -1,10 +1,9 @@
-const ResetPasswordConfirm=()=>{
-    return(
-        <>
-        <h1>ResetPasswordConfirm</h1>
-        </>
-    );
+const ResetPasswordConfirm = () => {
+	return (
+		<>
+			<h1 className="text-white">ResetPasswordConfirm</h1>
+		</>
+	);
 };
-
 
 export default ResetPasswordConfirm;
