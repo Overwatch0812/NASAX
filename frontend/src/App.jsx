@@ -26,7 +26,6 @@ function App() {
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/feed" element={<FeedPage />} />
-				<Route path="/spin" element={<Spinner />} />
 				<Route path="/activate/:uid/:token" element={<Activate />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
 				<Route

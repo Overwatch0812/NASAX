@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login, load } from "../features/auth/authSlice";
+import { login, reset } from "../features/auth/authSlice";
 import { isAuthenticated } from "../features/auth/authService";
+import Spinner from "./Spinner";
 
 const Login = () => {
 	const [formData, setFormData] = useState({
@@ -11,15 +12,34 @@ const Login = () => {
 	});
 
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+  const navigate = useNavigate();
+
+
+  const { user, isLoading, IsError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
 
 	const { email, password } = formData;
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const userData = { email, password };
-		dispatch(login(userData)).then(navigate("/home"));
+		dispatch(login(userData))
 	};
+
+
+	useEffect(() => {
+		if (IsError) {
+		  console.error(message);
+		}
+		if (isSuccess || user) {
+		  navigate("/");
+		}
+	
+		dispatch(reset());
+	  }, [user, IsError, isSuccess, dispatch, navigate]);
+
 
 	const onChange = (e) =>
 		setFormData({
@@ -36,17 +56,18 @@ const Login = () => {
 				<h1 className="w-full text-2xl my-3 mb-7 font-bold text-[#00df9a] text-center">
 					Login
 				</h1>
+				{isLoading && <Spinner />}
 				<form
 					onSubmit={(e) => onSubmit(e)}
 					className="flex flex-col gap-3"
 				>
-					<input
+					{/* <input
 						type="text"
 						placeholder="Enter your Fullname"
 						name="name"
 						className=" py-2 px-3 rounded-md"
 						required
-					/>
+					/> */}
 					<input
 						type="email"
 						placeholder="Email"

@@ -35,11 +35,35 @@ const login = async (userData) => {
   };
   try {
     const response = await axios.post(LOGIN_URL, userData, config);
+    if(response.data){
+      localStorage.setItem('user',JSON.stringify(response.data))
+    }
     return response.data;
   } catch {
     (e) => console.log(e);
   }
 };
+
+// activate user
+const activate = async (userData) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.post(ACTIVATION_URL, userData, config);
+    return response.data;
+  } catch {
+    (e) => console.log(e);
+  }
+};
+
+
+// 
+export const logout=()=>{
+  return localStorage.removeItem('user')
+}
 
 
 
@@ -64,6 +88,6 @@ export const isAuthenticated = async () => {
 };
 
 
-const authService = { signup, login };
+const authService = { signup, login,logout,activate };
 
 export default authService;
