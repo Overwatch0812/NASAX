@@ -100,7 +100,7 @@ const Signup = () => {
 		if (isSuccess || user) {
 			navigate("/login");
 		}
-	});
+	}, []);
 
 	const resetSelectValues = () => {
 		setbranchz(branchs[0]); // Reset to the default value
@@ -144,7 +144,7 @@ const Signup = () => {
 		<div className="max-w-[800px] min-h-screen mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">
 			<div className="border px-6 py-3 rounded-lg">
 				<h1 className="w-full text-2xl my-3 mb-7 font-bold text-[#00df9a] text-center">
-					<Link to="/">Register</Link>
+					<Link to="/signup">Register</Link>
 				</h1>
 				<form
 					onSubmit={(e) => onSubmit(e)}
@@ -172,8 +172,10 @@ const Signup = () => {
 					</div>
 					<Select
 						options={branchs}
-						onChange={(selectedOptions) => {
-							setbranchz1(selectedOptions.value);
+						onChange={(e) => {
+							const ans = e.value;
+							setbranchz1(ans);
+							// console.log(e.value);
 							console.log(branch1);
 						}}
 					/>
@@ -247,8 +249,11 @@ const Signup = () => {
 						Signup
 					</button>
 				</form>
-				<p className="text-white">
-					Already Have An Account? <Link to="/login">Login</Link>
+				<p className="text-white text-center mt-3 mb-2">
+					Already Have An Account?{" "}
+					<Link to="/login">
+						<span className="text-blue-400 underline">Login</span>
+					</Link>
 				</p>
 			</div>
 		</div>
