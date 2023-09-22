@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
-import { Link,useNavigate} from "react-router-dom";
+import { Link,useNavigate,redirect} from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { login,load } from "../features/auth/authSlice";
+import { isAuthenticated } from "../features/auth/authService";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,15 +13,16 @@ const Login = () => {
   const dispatch=useDispatch()
   const navigate=useNavigate()
 
-
+  
   const { email, password } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
     const userData={email,password}
-    dispatch(login(userData))
+    dispatch(login(userData)).then(navigate('/home'))
   };
 
+  
   const onChange = (e) =>
     setFormData({
       ...formData,

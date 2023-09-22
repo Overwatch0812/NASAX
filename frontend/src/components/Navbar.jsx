@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
 

@@ -1,5 +1,6 @@
 Manage/db.sqlite3
 
-node_modules*
-.env*
-*__pycache__
+*node_modules
+
+*.env
+*__pycache__/
