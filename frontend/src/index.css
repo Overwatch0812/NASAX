@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body
-{
-    background-color: #000300;
+
+
+@layer base{
+
+    body
+    {
+        background-color: #000300;
+        font-family: 'Poppins', sans-serif;
+    }
 }

@@ -70,6 +70,15 @@ const Signup = () => {
 		password: "",
 		re_password: "",
 	});
+	const [domain1, setDomainz1] = useState(null);
+	const [branch1, setbranchz1] = useState("");
+	const [preferred_language1, setPreferred_languagez1] = useState();
+	const [
+		level_of_understanding_of_preferred_language1,
+		setLevel_Of_Understanding_Of_Preferred_Languagez1,
+	] = useState();
+	const [university1, setUniversitiez1] = useState();
+	const [academic_year1, setAcademicYearz1] = useState();
 
 	const { email, password, re_password, full_name } = formData;
 
@@ -93,6 +102,15 @@ const Signup = () => {
 		}
 	});
 
+	const resetSelectValues = () => {
+		setbranchz(branchs[0]); // Reset to the default value
+		setPreferred_languagez(languages[0]);
+		setDomainz(domains[0]);
+		setLevel_Of_Understanding_Of_Preferred_Languagez(Understanding[0]);
+		setUniversitiez(Universities[0]);
+		setAcademicYearz(AcademicYear[0]);
+	};
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const userData = {
@@ -110,6 +128,7 @@ const Signup = () => {
 		dispatch(signup(userData)).then((e) => {
 			console.log(e);
 		});
+		resetSelectValues();
 	};
 
 	const onChange = (e) =>
@@ -122,95 +141,117 @@ const Signup = () => {
 	// if yes ridirect to main page
 
 	return (
-		<>
-			<h1>Signup</h1>
-			<form onSubmit={(e) => onSubmit(e)}>
-				<input
-					type="text"
-					placeholder="Name"
-					name="full_name"
-					value={full_name}
-					onChange={(e) => onChange(e)}
-					required
-				/>
-				<input
-					type="email"
-					placeholder="Email"
-					name="email"
-					value={email}
-					onChange={(e) => onChange(e)}
-					required
-				/>
-				<Select
-					value={branch.value}
-					options={branch}
-					defaultValue={branch[0]}
-					onChange={(e) => setbranchz(e.value)}
-				/>
+		<div className="max-w-[800px] min-h-screen mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">
+			<div className="border px-6 py-3 rounded-lg">
+				<h1 className="w-full text-2xl my-3 mb-7 font-bold text-[#00df9a] text-center">
+					<Link to="/">Register</Link>
+				</h1>
+				<form
+					onSubmit={(e) => onSubmit(e)}
+					className="flex flex-col gap-3 "
+				>
+					<div className="flex flex-col lg:flex-row gap-3">
+						<input
+							type="text"
+							placeholder="Full-Name"
+							name="full_name"
+							value={full_name}
+							onChange={(e) => onChange(e)}
+							required
+							className="lg:basis-1/2 py-2 px-3 rounded-md"
+						/>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							value={email}
+							onChange={(e) => onChange(e)}
+							required
+							className="basis-1/2 py-2 px-3 rounded-md"
+						/>
+					</div>
+					<Select
+						options={branchs}
+						onChange={(selectedOptions) => {
+							setbranchz1(selectedOptions.value);
+							console.log(branch1);
+						}}
+					/>
 
-				<Select
-					value={preferred_language.value}
-					options={preferred_language}
-					onChange={(e) => setPreferred_languagez(e.value)}
-					defaultValue={preferred_language[0]}
-				/>
+					<Select
+						value={preferred_language.value}
+						options={preferred_language}
+						defaultValue={preferred_language[0]}
+						onChange={(e) => setPreferred_languagez(e.value)}
+					/>
 
-				<Select
-					value={domain.value}
-					options={domain}
-					defaultValue={domain[0]}
-					onChange={(e) => setDomainz(e.value)}
-				/>
+					<Select
+						value={domain.value}
+						options={domain}
+						defaultValue={domain[0]}
+						onChange={(e) => setDomainz(e.value)}
+					/>
 
-				<Select
-					value={level_of_understanding_of_preferred_language.value}
-					onChange={(e) =>
-						setLevel_Of_Understanding_Of_Preferred_Languagez(
-							e.value
-						)
-					}
-					options={level_of_understanding_of_preferred_language}
-					defaultValue={
-						level_of_understanding_of_preferred_language[0]
-					}
-				/>
+					<Select
+						value={
+							level_of_understanding_of_preferred_language.value
+						}
+						onChange={(e) =>
+							setLevel_Of_Understanding_Of_Preferred_Languagez(
+								e.value
+							)
+						}
+						options={level_of_understanding_of_preferred_language}
+						defaultValue={
+							level_of_understanding_of_preferred_language[0]
+						}
+					/>
 
-				<Select
-					value={university.value}
-					options={university}
-					onChange={(e) => setUniversitiez(e.value)}
-					defaultValue={university[0]}
-				/>
+					<Select
+						value={university.value}
+						options={university}
+						onChange={(e) => setUniversitiez(e.value)}
+						defaultValue={university[0]}
+					/>
 
-				<Select
-					value={academic_year.value}
-					options={academic_year}
-					onChange={(e) => setAcademicYearz(e.value)}
-					defaultValue={academic_year[0]}
-				/>
-
-				<input
-					type="password"
-					placeholder="Password"
-					name="password"
-					value={password}
-					onChange={(e) => onChange(e)}
-					required
-				/>
-				<input
-					type="password"
-					placeholder="Confirm Password"
-					name="re_password"
-					value={re_password}
-					onChange={(e) => onChange(e)}
-					required
-				/>
-				<button type="submit">Signup</button>
-			</form>
-			<p>
-				Already Have An Account? <Link to="/login">Login</Link>
-			</p>
-		</>
+					<Select
+						value={academic_year.value}
+						options={academic_year}
+						onChange={(e) => setAcademicYearz(e.value)}
+						defaultValue={academic_year[0]}
+					/>
+					<div className="flex flex-col lg:flex-row gap-3">
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							value={password}
+							onChange={(e) => onChange(e)}
+							required
+							className="basis-1/2 py-2 px-3 rounded-md"
+						/>
+						<input
+							type="password"
+							placeholder="Confirm Password"
+							name="re_password"
+							value={re_password}
+							onChange={(e) => onChange(e)}
+							required
+							className="basis-1/2 py-2 px-3 rounded-md"
+						/>
+					</div>
+					<button
+						type="submit"
+						className="text-black bg-[#00df9a] py-2 px-3 rounded-md"
+					>
+						Signup
+					</button>
+				</form>
+				<p className="text-white">
+					Already Have An Account? <Link to="/login">Login</Link>
+				</p>
+			</div>
+		</div>
 	);
 };
 
