@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import Laptop from "../assets/laptop.jpg";
 export default function Analytics() {
 	return (
@@ -27,9 +27,11 @@ export default function Analytics() {
 						also help in cross functional research between various
 						universities/colleges.
 					</p>
-					<button className="bg-black text-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto md:mx-0 py-3">
-						Get Started
-					</button>
+					<Link to="/signup">
+						<button className="bg-black text-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto md:mx-0 py-3">
+							Get Started
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,10 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+	createBrowserRouter,
+	RouterProvider,
+	Route,
+	Routes,
+} from "react-router-dom";
 
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -11,41 +16,20 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 function App() {
-	const router = createBrowserRouter([
-		{
-			path: "/",
-			element: <Homes />,
-		},
-		{
-			path: "/signup",
-			element: <Signup />,
-		},
-		// {
-		// 	path: "/home",
-		// 	element: <Homes />,
-		// },
-		{
-			path: "/login",
-			element: <Login />,
-		},
-		{
-			path: "/activate/:uid/:token",
-			element: <Activate />,
-		},
-		{
-			path: "/reset-password",
-			element: <ResetPassword />,
-		},
-		{
-			path: "/password/reset/confirm/:uid/:token",
-			element: <ResetPasswordConfirm />,
-		},
-	]);
-
 	return (
 		<>
 			<Navbar />
-			<RouterProvider router={router} />
+			<Routes>
+				<Route path="/" element={<Homes />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/activate/:uid/:token" element={<Activate />} />
+				<Route path="/reset-password" element={<ResetPassword />} />
+				<Route
+					path="/password/reset/confirm/:uid/:token"
+					element={<ResetPasswordConfirm />}
+				/>
+			</Routes>
 			<Footer />
 		</>
 	);

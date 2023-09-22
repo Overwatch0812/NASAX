@@ -1,4 +1,5 @@
 import Typed from "react-typed";
+import { Link } from "react-router-dom";
 import Analytics from "./Analytics";
 import Features from "./Features";
 import NewsLetter from "./NewsLetter";
@@ -30,9 +31,11 @@ const Homes = () => {
 						Search for your intrest across all domains and all
 						colleges.
 					</p>
-					<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black">
-						Get Started
-					</button>
+					<Link to="/signup">
+						<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black">
+							Get Started
+						</button>
+					</Link>
 				</div>
 			</div>
 			<Analytics />

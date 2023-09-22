@@ -1,6 +1,7 @@
 import Single from "../assets/single.png";
 import Double from "../assets/double.png";
 import Triple from "../assets/triple.png";
+import { Link } from "react-router-dom";
 import { TbReportSearch } from "react-icons/tb";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 export default function Cards() {
@@ -23,9 +24,11 @@ export default function Cards() {
 						distinctio excepturi exercitationem dolore ducimus
 						repellat vero esse perspiciatis.
 					</p>
-					<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
-						Get Started
-					</button>
+					<Link to="/signup" className="text-center">
+						<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
+							Get Started
+						</button>
+					</Link>
 				</div>
 				<div className="w-full shadow-xl bg-gray-100 flex flex-col p-4 md:my-0 my-8 rounded-lg hover:scale-105 duration-300">
 					<img
@@ -42,9 +45,11 @@ export default function Cards() {
 						distinctio excepturi exercitationem dolore ducimus
 						repellat vero esse perspiciatis.
 					</p>
-					<button className="bg-black text-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
-						Get Started
-					</button>
+					<Link to="/signup" className="text-center">
+						<button className="bg-black text-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
+							Get Started
+						</button>
+					</Link>
 				</div>
 				<div className="w-full shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300">
 					<div className="w-20 mx-auto mt-[-3rem] bg-white flex justify-center">
@@ -62,9 +67,11 @@ export default function Cards() {
 						distinctio excepturi exercitationem dolore ducimus
 						repellat vero esse perspiciatis.
 					</p>
-					<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
-						Get Started
-					</button>
+					<Link to="/signup" className="text-center">
+						<button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
+							Get Started
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>
