@@ -15,6 +15,7 @@ import ResetPasswordConfirm from "./components/ResetPasswordConfirm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FeedPage from "./components/FeedPage";
+import Spinner from "./components/Spinner";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/feed" element={<FeedPage />} />
+				<Route path="/spin" element={<Spinner />} />
 				<Route path="/activate/:uid/:token" element={<Activate />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
 				<Route
