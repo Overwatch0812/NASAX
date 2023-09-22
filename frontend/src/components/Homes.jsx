@@ -36,8 +36,8 @@ const Homes = () => {
 				</div>
 			</div>
 			<Analytics />
-			<Features />
 			<NewsLetter />
+			<Features />
 		</>
 	);
 };
