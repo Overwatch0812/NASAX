@@ -3,13 +3,16 @@ import authService from "./authService";
 import axios from "axios";
 import { isAuthenticated } from "./authService";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 const initialState = {
-  user: null,
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
+
 // for signup
 export const signup = createAsyncThunk(
   "auth/signup",
@@ -26,7 +29,6 @@ export const signup = createAsyncThunk(
   }
 );
 
-
 // login
 export const login = createAsyncThunk(
   "auth/login",
@@ -36,7 +38,6 @@ export const login = createAsyncThunk(
       if (!data.access) {
         console.log("No ACCESS");
       } else {
-        
       }
       return data;
     } catch (error) {
@@ -50,33 +51,29 @@ export const login = createAsyncThunk(
 );
 
 // logout
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async () => {
-    authService.logout()
-  }
-  );
-  
+export const logout = createAsyncThunk("auth/logout", async () => {
+  authService.logout();
+});
+
 export const activate = createAsyncThunk(
-    "auth/activate",
-    async (userData, thunkAPI) => {
-      try {
-        const data = await authService.activate(userData);
-        if (!data.access) {
-          console.log("No ACCESS");
-        } else {
-          
-        }
-        return data;
-      } catch (error) {
-        const message =
-          (error.response && error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
+  "auth/activate",
+  async (userData, thunkAPI) => {
+    try {
+      const data = await authService.activate(userData);
+      if (!data.access) {
+        console.log("No ACCESS");
+      } else {
       }
+      return data;
+    } catch (error) {
+      const message =
+        (error.response && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
-  );
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -104,7 +101,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        state.user=null;
+        state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -119,7 +116,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        state.user=null;
+        state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
@@ -137,7 +134,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        state.user=null;
+        state.user = null;
       });
   },
 });
@@ -154,60 +151,25 @@ export const load = async () => {
       },
     };
     try {
-        if(localStorage.getItem("access")){
-            if(isAuthenticated){
-                const data = await axios.get(
-                    "http://127.0.0.1:8000/auth/users/me/",
-                    config
-                  );
-                  return data;
-            }else{
-                console.log('Users JWT is NOt VAlid')
-            }
-            
-        }else{
-            console.log('Not logged in')
+      if (localStorage.getItem("access")) {
+        if (isAuthenticated) {
+          const data = await axios.get(
+            "http://127.0.0.1:8000/auth/users/me/",
+            config
+          );
+          return data;
+        } else {
+          console.log("Users JWT is NOt VAlid");
         }
+      } else {
+        console.log("Not logged in");
+      }
     } catch (error) {}
   } else {
     console.log("Error in loadiing User");
   }
 };
 
-// for login
-
-
-// export const loginSlice = createSlice({
-//   name: "login",
-//   initialState,
-//   reducers: {
-//     reset: (state) => {
-//       state.isLoading = false;
-//       state.isError = false;
-//       state.isSuccess = false;
-//       state.message = false;
-//     },
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(signup.pending, (state) => {
-//         state.isLoading = true;
-//       })
-//       .addCase(signup.fulfilled, (state, action) => {
-//         state.isLoading = false;
-//         state.isSuccess = true;
-//         state.user = action.payload;
-//       })
-//       .addCase(signup.rejected, (state) => {
-//         state.isLoading = false;
-//         state.isSuccess = false;
-//         state.isError = true;
-//         state.message = action.payload;
-//       });
-//   },
-// });
-// // for login ends
-
-export const {reset}=authSlice.actions
+export const { reset } = authSlice.actions;
 
 export default authSlice.reducer;
