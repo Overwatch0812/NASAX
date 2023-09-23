@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login, reset } from "../features/auth/authSlice";
+import { login, reset, load } from "../features/auth/authSlice";
 import { isAuthenticated } from "../features/auth/authService";
 import Spinner from "./Spinner";
 
@@ -14,16 +14,22 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isLoading, IsError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user, isLoading, IsError, isSuccess, message, isUserLoaded } =
+    useSelector((state) => state.auth);
 
   const { email, password } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    dispatch(login(userData));
+    dispatch(login(userData)).then(() => {
+      if (isAuthenticated()) {
+        dispatch(load());
+        dispatch(reset());
+      } else {
+        console.log("JWT is not valid");
+      }
+    });
   };
 
   useEffect(() => {
@@ -31,7 +37,7 @@ const Login = () => {
       console.error(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/feed");
     }
 
     dispatch(reset());
