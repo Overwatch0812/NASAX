@@ -15,7 +15,7 @@ import ResetPasswordConfirm from "./components/ResetPasswordConfirm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FeedPage from "./components/FeedPage";
-
+// TODO:Feed Page,Project Detail Page,Add new Project ,Share Comment,Star the Project
 function App() {
 	return (
 		<>
