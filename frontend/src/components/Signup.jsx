@@ -141,7 +141,7 @@ const Signup = () => {
 	// if yes ridirect to main page
 
 	return (
-		<div className="max-w-[800px] min-h-screen mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">
+		<div className="max-w-[800px] min-h-full mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">
 			<div className="border px-6 py-3 rounded-lg">
 				<h1 className="w-full text-2xl my-3 mb-7 font-bold text-[#00df9a] text-center">
 					<Link to="/signup">Register</Link>
@@ -242,12 +242,11 @@ const Signup = () => {
 							className="basis-1/2 py-2 px-3 rounded-md"
 						/>
 					</div>
-					<button
-						type="submit"
-						className="text-black bg-[#00df9a] py-2 px-3 rounded-md"
-					>
-						Signup
-					</button>
+					<div className="text-black bg-[#00df9a] py-2 px-3 rounded-md text-center ">
+						<Link to="/feed">
+							<button type="submit">Signup</button>
+						</Link>
+					</div>
 				</form>
 				<p className="text-white text-center mt-3 mb-2">
 					Already Have An Account?{" "}
