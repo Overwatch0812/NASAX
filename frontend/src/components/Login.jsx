@@ -95,12 +95,11 @@ const Login = () => {
 							</span>
 						</p>
 					</div>
-					<button
-						type="submit"
-						className="text-black bg-[#00df9a] py-2 px-3 rounded-md"
-					>
-						Login
-					</button>
+					<div className="text-black bg-[#00df9a] py-2 px-3 rounded-md text-center hover:cursor-pointer">
+						<Link to="/feed">
+							<button type="submit">Login</button>
+						</Link>
+					</div>
 				</form>
 				<div className="flex flex-col">
 					<p className="text-white text-center mt-3 mb-2">
