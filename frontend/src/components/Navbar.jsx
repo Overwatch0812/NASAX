@@ -18,7 +18,13 @@ const Navbar = () => {
 				{/* <li className="p-4 md:text-xl">Company</li> */}
 				{/* <li className="p-4 md:text-xl">Resources</li> */}
 				<li className="p-4 md:text-xl">
-					<Link to="/">About</Link>
+					<Link to="/feed">About</Link>
+				</li>
+				<li className="p-4 md:text-xl">
+					<Link to="/login">Login</Link>
+				</li>
+				<li className="p-4 md:text-xl">
+					<Link to="/signup">Sign Up</Link>
 				</li>
 				<li className="p-4 md:text-xl">Contact</li>
 			</ul>
