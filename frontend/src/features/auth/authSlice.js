@@ -3,7 +3,7 @@ import authService from "./authService";
 import axios from "axios";
 import { isAuthenticated } from "./authService";
 
-const user = localStorage.getItem("access")
+const user = localStorage.getItem("access");
 
 const initialState = {
   user: user ? user : null,
@@ -56,7 +56,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
 });
 
-
 // for activation
 export const activate = createAsyncThunk(
   "auth/activate",
@@ -79,26 +78,21 @@ export const activate = createAsyncThunk(
 );
 
 // for user loaded
-export const load = createAsyncThunk(
-  "auth/load",
-  async () => {
-    try {
-      const data = await authService.load_user();
-      if (!data) {
-        console.log("User Not loaded");
-      }
-      return data;
-    } catch (error) {
-      const message =
-        (error.response && error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
+export const load = createAsyncThunk("auth/load", async () => {
+  try {
+    const data = await authService.load_user();
+    if (!data) {
+      console.log("User Not loaded");
     }
+    return data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
-
-
+});
 
 export const email_for_reset_pass = createAsyncThunk(
   "auth/reset_password",
@@ -119,6 +113,29 @@ export const email_for_reset_pass = createAsyncThunk(
   }
 );
 
+export const resetPasswordConfirm = createAsyncThunk(
+  "auth/reset_password_confirm",
+  async (uid, token, new_password, re_new_password) => {
+    try {
+      const data = await authService.reset_password_confirm(
+        uid,
+        token,
+        new_password,
+        re_new_password
+      );
+      if (!data) {
+        console.log("User Not loaded");
+      }
+      return data;
+    } catch (error) {
+      const message =
+        (error.response && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -128,7 +145,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
-      state.isUserLoaded= false;
+      state.isUserLoaded = false;
       state.message = false;
     },
   },
@@ -184,12 +201,12 @@ export const authSlice = createSlice({
       })
       .addCase(load.pending, (state) => {
         state.isLoading = true;
-        state.isUserLoaded=false;
+        state.isUserLoaded = false;
       })
       .addCase(load.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isUserLoaded=true;
+        state.isUserLoaded = true;
         state.user = action.payload;
       })
       .addCase(load.rejected, (state, action) => {
@@ -197,7 +214,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        state.isUserLoaded=false;
+        state.isUserLoaded = false;
         state.user = null;
       })
       .addCase(email_for_reset_pass.pending, (state) => {
@@ -214,11 +231,24 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null;
+      })
+      .addCase(resetPasswordConfirm.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetPasswordConfirm.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(resetPasswordConfirm.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
       });
   },
 });
-
-
 
 export const { reset } = authSlice.actions;
 

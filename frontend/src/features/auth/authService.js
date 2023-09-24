@@ -127,6 +127,7 @@ export const reset_password_confirm = async (uid,token,new_password,re_new_passw
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
     },
   };
   const body = JSON.stringify({ uid,token,new_password,re_new_password });
@@ -144,6 +145,7 @@ const authService = {
   activate,
   load_user,
   reset_password,
+  reset_password_confirm
 };
 
 export default authService;

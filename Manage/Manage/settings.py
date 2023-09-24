@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 
-CORS_ORIGIN_WHITELIST = ( 'http://127.0.0.1:8000','http://localhost:5173' )
+CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:8000', 'http://localhost:5173')
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
@@ -179,29 +179,32 @@ EMAIL_HOST_PASSWORD = env('PASSWORD')
 
 
 # djoser setup
+DOMAIN = 'localhost:5173'
+SITE_NAME = 'CampusX'
 DJOSER = {
     'LOGIN_FIELD': 'email',
-    'USER_CREATE_PASSWORD_RETYPE':True,
-    'USERNAME_CHANGED_EMAIL_CONFIRMATION':True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
-    'SEND_CONFIRMATION_EMAIL':True,
-    'SET_USERNAME_RETYPE':True,
-    'SET_PASSWORD_RETYPE':True,
-    'PASSWORD_RESET_CONFIRM_URL':'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL':'email/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL':'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL':True,
-    'SERIALIZERS':{
-        'user_create':'account.serializers.UserCreateSerializer',
-        'user':'account.serializers.UserCreateSerializer',
-        'user_delete':'djoser.serializers.UserDeleteSerializer',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'account.serializers.UserCreateSerializer',
+        'user': 'account.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }
 
 
 # rest framework setup
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':[
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -211,16 +214,16 @@ REST_FRAMEWORK = {
 
 # JWT config
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',"Bearer "),
-   'ACCESS_TOKEN_LIFETIME':timedelta(minutes=1),
-   'REFRESH_TOKEN_LIFETIME':timedelta(days=60),
-   "SIGNING_KEY":'q&d{E34iApUI`My(LKdA)FS/Nq6d&^',
-    'AUTH_HEADER_NAME':"HTTP_AUTHORIZATION",
-    "AUTH_TOKEN_CLASSESS":("rest_framework_simplejwt.tokens.AccessToken",)
+    'AUTH_HEADER_TYPES': ('JWT', "Bearer "),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
+    "SIGNING_KEY": 'q&d{E34iApUI`My(LKdA)FS/Nq6d&^',
+    'AUTH_HEADER_NAME': "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSESS": ("rest_framework_simplejwt.tokens.AccessToken",)
 }
 
 
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # config to manage media files:
@@ -230,5 +233,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': env('API_SECRET')
 }
 
-MEDIA_URL = '/media/' 
+MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
