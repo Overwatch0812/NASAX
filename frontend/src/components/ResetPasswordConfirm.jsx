@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { resetPasswordConfirm, reset } from "../features/auth/authSlice";
-import { isAuthenticated } from "../features/auth/authService";
-import Spinner from "./Spinner";
 
 const ResetPasswordConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {uid,token} = useParams();
 
   const [passwordChanged, setPasswordChanged] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,17 +13,18 @@ const ResetPasswordConfirm = () => {
     re_new_password: "",
   });
 
-  const { new_password,re_new_password } = formData;
+  const { uid, token } = useParams();
+  const { new_password, re_new_password } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(resetPasswordConfirm(uid,token,new_password,re_new_password));
+    const data={uid, token,new_password, re_new_password}
+    dispatch(resetPasswordConfirm(data)).then((e)=>{console.log(e)})
     setPasswordChanged(true);
-    dispatch(reset());
   };
 
   if (passwordChanged) {
-    navigate("/");
+    navigate("/login");
   }
 
   const onChange = (e) =>
@@ -45,7 +43,7 @@ const ResetPasswordConfirm = () => {
           Set New Password
         </h1>
         <form onSubmit={(e) => onSubmit(e)} className="flex flex-col gap-3">
-		<input
+          <input
             type="password"
             placeholder="New Password"
             name="new_password"
@@ -54,7 +52,7 @@ const ResetPasswordConfirm = () => {
             onChange={(e) => onChange(e)}
             required
           />
-		<input
+          <input
             type="password"
             placeholder="Confirm New Password"
             name="re_new_password"

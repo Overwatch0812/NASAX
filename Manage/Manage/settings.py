@@ -206,6 +206,7 @@ DJOSER = {
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -215,7 +216,7 @@ REST_FRAMEWORK = {
 # JWT config
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', "Bearer "),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
     "SIGNING_KEY": 'q&d{E34iApUI`My(LKdA)FS/Nq6d&^',
     'AUTH_HEADER_NAME': "HTTP_AUTHORIZATION",

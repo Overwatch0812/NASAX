@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-import axios from "axios";
 import { isAuthenticated } from "./authService";
 
 const user = localStorage.getItem("access");
@@ -98,11 +97,11 @@ export const email_for_reset_pass = createAsyncThunk(
   "auth/reset_password",
   async (email) => {
     try {
-      const data = await authService.reset_password(email);
-      if (!data) {
+      const response = await authService.reset_password(email);
+      if (!response) {
         console.log("User Not loaded");
       }
-      return data;
+      return response;
     } catch (error) {
       const message =
         (error.response && error.response.data.message) ||
@@ -114,17 +113,12 @@ export const email_for_reset_pass = createAsyncThunk(
 );
 
 export const resetPasswordConfirm = createAsyncThunk(
-  "auth/reset_password_confirm",
-  async (uid, token, new_password, re_new_password) => {
+  "auth/resetPasswordConfirm",
+  async (data, thunkAPI) => {
     try {
-      const data = await authService.reset_password_confirm(
-        uid,
-        token,
-        new_password,
-        re_new_password
-      );
-      if (!data) {
-        console.log("User Not loaded");
+      const dataz = await authService.resetPasswordConfirmz(data);
+      if (!dataz) {
+        console.log("Cannot change Password");
       }
       return data;
     } catch (error) {
@@ -236,16 +230,18 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(resetPasswordConfirm.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.user = action.payload;
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = action.payload;
+        state.isUserLoaded = false;
+        state.message = "Done";
       })
       .addCase(resetPasswordConfirm.rejected, (state, action) => {
         state.isLoading = false;
+        state.isError = false;
         state.isSuccess = false;
-        state.isError = true;
-        state.message = action.payload;
-        state.user = null;
+        state.isUserLoaded = false;
+        state.message = false;
       });
   },
 });

@@ -8,7 +8,7 @@ const LOGIN_URL = `${BACKEND_DOMAIN}/auth/jwt/create/`;
 const Verify_Jwt = `${BACKEND_DOMAIN}/auth/jwt/verify/`;
 const ACTIVATION_URL = `${BACKEND_DOMAIN}/auth/users/activation/`;
 const email_to_reset_password = `${BACKEND_DOMAIN}/auth/users/reset_password/`;
-const reset_password_confirm_url = `${BACKEND_DOMAIN}/auth/users/reset_password_confirm/`;
+const reset_password_confirm_url = 'http://127.0.0.1:8000/auth/users/reset_password_confirm/';
 const USERNAME_RESET_CONFIRM_URL = `${BACKEND_DOMAIN}/auth/users/`;
 
 const signup = async (userData) => {
@@ -123,19 +123,19 @@ export const reset_password = async (email) => {
 };
 
 // reset password confirm to get email
-export const reset_password_confirm = async (uid,token,new_password,re_new_password) => {
+const resetPasswordConfirmz = async (dataz) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      "Accept":"application/json"
     },
   };
-  const body = JSON.stringify({ uid,token,new_password,re_new_password });
+  const body = dataz;
   try {
     const response = await axios.post(reset_password_confirm_url, body, config);
-    return response.data;
-  } catch {
-    (e) => console.log(e);
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 };
 const authService = {
@@ -145,7 +145,7 @@ const authService = {
   activate,
   load_user,
   reset_password,
-  reset_password_confirm
+  resetPasswordConfirmz,
 };
 
 export default authService;
