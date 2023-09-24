@@ -70,16 +70,7 @@ const Signup = () => {
     password: "",
     re_password: "",
   });
-  const [domain1, setDomainz1] = useState(null);
-  const [branch1, setbranchz1] = useState("");
-  const [preferred_language1, setPreferred_languagez1] = useState();
-  const [
-    level_of_understanding_of_preferred_language1,
-    setLevel_Of_Understanding_Of_Preferred_Languagez1,
-  ] = useState();
-  const [university1, setUniversitiez1] = useState();
-  const [academic_year1, setAcademicYearz1] = useState();
-
+  
   const { email, password, re_password, full_name } = formData;
 
   const dispatch = useDispatch();
@@ -104,14 +95,6 @@ const Signup = () => {
     dispatch(reset());
   }, [user, IsError, isSuccess, dispatch, navigate]);
 
-  const resetSelectValues = () => {
-    setbranchz(branchs[0]); // Reset to the default value
-    setPreferred_languagez(languages[0]);
-    setDomainz(domains[0]);
-    setLevel_Of_Understanding_Of_Preferred_Languagez(Understanding[0]);
-    setUniversitiez(Universities[0]);
-    setAcademicYearz(AcademicYear[0]);
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -131,7 +114,6 @@ const Signup = () => {
       dispatch(signup(userData)).then((e) => {
         console.log(e);
       });
-      resetSelectValues();
     } else {
       alert("password not matching");
     }
@@ -143,8 +125,6 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
 
-  // isAuthenticated
-  // if yes ridirect to main page
 
   return (
     <div className="max-w-[800px] min-h-screen mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">
@@ -175,13 +155,11 @@ const Signup = () => {
             />
           </div>
           <Select
-            options={branchs}
-            defaultValue={branchs[0]}
+            options={branch}
+            value={branch.value}
+            defaultValue={branch[0]}
             onChange={(e) => {
-              const ans = e.value;
-              setbranchz1(ans);
-              // console.log(e.value);
-              console.log(branch1);
+              setbranchz(e.value);
             }}
           />
 

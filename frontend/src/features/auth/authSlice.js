@@ -61,8 +61,8 @@ export const activate = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const data = await authService.activate(userData);
-      if (!data.access) {
-        console.log("No ACCESS");
+      if (!data) {
+        console.log("Not activated");
       } else {
       }
       return data;

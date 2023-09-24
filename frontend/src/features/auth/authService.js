@@ -54,7 +54,7 @@ const activate = async (userData) => {
   };
   try {
     const response = await axios.post(ACTIVATION_URL, userData, config);
-    return response.data;
+    return response;
   } catch {
     (e) => console.log(e);
   }
