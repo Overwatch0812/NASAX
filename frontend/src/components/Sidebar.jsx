@@ -8,7 +8,7 @@ export default function Sidebar() {
 	};
 	return (
 		<div>
-			<h3 className="text-xl my-2">Projects</h3>
+			<h3 className="text-2xl font-semibold my-2">Projects</h3>
 			<div className="w-full px-3 py-5 border border-cardGrey rounded-md">
 				<ul className="list-none flex flex-col gap-1">
 					<li className="flex gap-2 items-center">

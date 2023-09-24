@@ -4,6 +4,7 @@ import Triple from "../assets/triple.png";
 import { Link } from "react-router-dom";
 import { TbReportSearch } from "react-icons/tb";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import Select from "react-select";
 export default function Cards() {
 	return (
 		<div className="w-full py-[8rem] px-4 bg-white">
