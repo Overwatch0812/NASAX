@@ -89,7 +89,7 @@ const Signup = () => {
       console.error("ERROR");
     }
     if (isSuccess || user) {
-      navigate("/login");
+      navigate("/lobby");
     }
 
     dispatch(reset());
@@ -114,6 +114,7 @@ const Signup = () => {
       dispatch(signup(userData)).then((e) => {
         console.log(e);
       });
+      console.log(user, isLoading, IsError, isSuccess, message)
     } else {
       alert("password not matching");
     }

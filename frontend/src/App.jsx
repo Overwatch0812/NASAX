@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FeedPage from "./components/FeedPage";
 import Spinner from "./components/Spinner";
+import PLS from "./components/plsActivate";
 
 // TODO:Feed Page,Project Detail Page,Add new Project ,Share Comment,Star the Project
 function App() {
@@ -27,6 +28,7 @@ function App() {
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/feed" element={<FeedPage />} />
+				<Route path="/lobby" element={<PLS />} />
 				<Route path="/activate/:uid/:token" element={<Activate />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
 				<Route

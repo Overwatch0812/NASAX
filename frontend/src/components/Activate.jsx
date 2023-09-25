@@ -10,8 +10,8 @@ const Activate = () => {
   const { uid, token } = useParams();
 
   function handleClick() {
-    const data = { uid, token };
-    dispatch(activate(data));
+    const userData = { uid, token };
+    dispatch(activate(userData));
     setIsActivated(true)
   }
   if(isActivated){
@@ -19,7 +19,7 @@ const Activate = () => {
   }
   return (
     <>
-      <button onClick={handleClick}>Activate</button>
+      <button className="text-[#00df9a] text-center" onClick={handleClick}>Activate</button>
     </>
   );
 };

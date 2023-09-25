@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'api',
     'cloudinary_storage',
     'cloudinary',
+    'home'
 ]
 
 CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:8000', 'http://localhost:5173')
@@ -88,7 +89,7 @@ ROOT_URLCONF = 'Manage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +111,7 @@ WSGI_APPLICATION = 'Manage.wsgi.application'
 # DATABASES = {
 #     'default': {
 #             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'SIH(Manage)',
+#             'NAME': 'SIH(Manage)2.0',
 #             'USER': 'postgres',
 #             'PASSWORD': '1234',
 #             'HOST': 'localhost',
