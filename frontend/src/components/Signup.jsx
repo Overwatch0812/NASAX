@@ -70,7 +70,7 @@ const Signup = () => {
     password: "",
     re_password: "",
   });
-  
+
   const { email, password, re_password, full_name } = formData;
 
   const dispatch = useDispatch();
@@ -95,7 +95,6 @@ const Signup = () => {
     dispatch(reset());
   }, [user, IsError, isSuccess, dispatch, navigate]);
 
-
   const onSubmit = (e) => {
     e.preventDefault();
     if (password === re_password) {
@@ -114,7 +113,7 @@ const Signup = () => {
       dispatch(signup(userData)).then((e) => {
         console.log(e);
       });
-      console.log(user, isLoading, IsError, isSuccess, message)
+      console.log(user, isLoading, IsError, isSuccess, message);
     } else {
       alert("password not matching");
     }
@@ -125,7 +124,6 @@ const Signup = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-
 
   return (
     <div className="max-w-[800px] min-h-screen mx-auto w-[65%] px-4 my-12 flex flex-col gap-5">

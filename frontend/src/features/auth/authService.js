@@ -8,7 +8,8 @@ const LOGIN_URL = `${BACKEND_DOMAIN}/auth/jwt/create/`;
 const Verify_Jwt = `${BACKEND_DOMAIN}/auth/jwt/verify/`;
 const ACTIVATION_URL = `${BACKEND_DOMAIN}/auth/users/activation/`;
 const email_to_reset_password = `${BACKEND_DOMAIN}/auth/users/reset_password/`;
-const reset_password_confirm_url = 'http://127.0.0.1:8000/auth/users/reset_password_confirm/';
+const reset_password_confirm_url =
+  "http://127.0.0.1:8000/auth/users/reset_password_confirm/";
 const USERNAME_RESET_CONFIRM_URL = `${BACKEND_DOMAIN}/auth/users/`;
 
 const signup = async (userData) => {
@@ -78,7 +79,6 @@ const load_user = async () => {
   };
   try {
     const response = await axios.get(User_data, config);
-    console.log(response.data);
     return response.data;
   } catch {
     (e) => console.log(e);
@@ -127,7 +127,7 @@ const resetPasswordConfirmz = async (dataz) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      "Accept":"application/json"
+      Accept: "application/json",
     },
   };
   const body = dataz;
@@ -138,6 +138,7 @@ const resetPasswordConfirmz = async (dataz) => {
     console.log(error);
   }
 };
+
 const authService = {
   signup,
   login,

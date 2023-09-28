@@ -1,9 +1,9 @@
 import "./App.css";
 import {
-	createBrowserRouter,
-	RouterProvider,
-	Route,
-	Routes,
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Routes,
 } from "react-router-dom";
 
 import Signup from "./components/Signup";
@@ -18,27 +18,27 @@ import FeedPage from "./components/FeedPage";
 import Spinner from "./components/Spinner";
 import PLS from "./components/plsActivate";
 
-// TODO:Feed Page,Project Detail Page,Add new Project ,Share Comment,Star the Project
+// TODO:Create Shimmer
 function App() {
-	return (
-		<>
-			<Navbar />
-			<Routes>
-				<Route path="/" element={<Homes />} />
-				<Route path="/signup" element={<Signup />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/feed" element={<FeedPage />} />
-				<Route path="/lobby" element={<PLS />} />
-				<Route path="/activate/:uid/:token" element={<Activate />} />
-				<Route path="/reset-password" element={<ResetPassword />} />
-				<Route
-					path="/password/reset/confirm/:uid/:token"
-					element={<ResetPasswordConfirm />}
-				/>
-			</Routes>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homes />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/lobby" element={<PLS />} />
+        <Route path="/activate/:uid/:token" element={<Activate />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/password/reset/confirm/:uid/:token"
+          element={<ResetPasswordConfirm />}
+        />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

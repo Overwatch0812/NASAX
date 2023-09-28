@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   isUserLoaded: false,
+  isProjectApiFetched: false,
   message: "",
 };
 
@@ -198,7 +199,7 @@ export const authSlice = createSlice({
         state.isUserLoaded = false;
       })
       .addCase(load.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading = true;
         state.isSuccess = true;
         state.isUserLoaded = true;
         state.user = action.payload;
