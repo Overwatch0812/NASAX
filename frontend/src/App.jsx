@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import FeedPage from "./components/FeedPage";
 import Spinner from "./components/Spinner";
 import PLS from "./components/plsActivate";
+import ProjectDetail from "./components/ProjectDetail";
 
 // TODO:Create Shimmer
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/lobby" element={<PLS />} />
         <Route path="/activate/:uid/:token" element={<Activate />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
         <Route
           path="/password/reset/confirm/:uid/:token"
           element={<ResetPasswordConfirm />}

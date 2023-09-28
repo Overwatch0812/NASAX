@@ -15,5 +15,20 @@ export const fetchProjectData = async () => {
   }
 };
 
-const projectService = { fetchProjectData };
+export const FetchProjectDetail = async (id) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const Url = "http://127.0.0.1:8000/api/" + id + "/";
+  try {
+    const res = await axios.get(Url, config);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const projectService = { fetchProjectData, FetchProjectDetail };
 export default projectService;

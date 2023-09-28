@@ -3,8 +3,9 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../features/auth/authSlice";
+import { reset } from "../features/projects/projectSlice";
 import { fetchProjectApiData } from "../features/projects/projectSlice";
+import { Link } from "react-router-dom";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
@@ -18,8 +19,7 @@ export default function FeedPage() {
     if (isSuccess || user) {
       dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
     }
-  }, []);
-  console.log(cardData);
+  }, [user, isSuccess]);
 
   return !cardData ? (
     <h1 className="text-[#00df9a]">Data is Being Fetched</h1>
@@ -31,7 +31,11 @@ export default function FeedPage() {
 			"
       >
         {cardData.map((project) => {
-          return <FeedCard key={project.id} {...project} />;
+          return (
+            <Link to={"/project/" + project.id} key={project.id}>
+              <FeedCard {...project} />
+            </Link>
+          );
         })}
       </div>
     </div>
