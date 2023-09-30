@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProjectDetail } from "../features/projects/projectSlice";
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 const ProjectDetail = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const ProjectDetail = () => {
   console.log(projectDetail);
 
   return !projectDetail ? (
-    <h1 className="text-white">Data Is Loading</h1>
+    <Spinner />
   ) : (
     <>
       <img src={projectDetail.thumbnail} />
