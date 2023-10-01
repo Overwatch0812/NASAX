@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { reset } from "../features/projects/projectSlice";
 import { fetchProjectApiData } from "../features/projects/projectSlice";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function FeedPage() {
   }, [user, isSuccess]);
 
   return !cardData ? (
-    <h1 className="text-[#00df9a]">Data is Being Fetched</h1>
+    <Spinner />
   ) : (
     <div className="max-w-[1200px]  mx-3 lg:mx-auto  flex flex-col text-white">
       <Search />
