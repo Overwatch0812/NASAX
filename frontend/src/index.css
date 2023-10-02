@@ -10,5 +10,10 @@
     {
         background-color: #000300;
         font-family: 'Poppins', sans-serif;
+        
     }
+
+    .no-scroll::-webkit-scrollbar {
+        display: none;
+      }
 }
