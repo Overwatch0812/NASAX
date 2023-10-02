@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { reset } from "../features/projects/projectSlice";
 import { fetchProjectApiData } from "../features/projects/projectSlice";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 export default function FeedPage() {
 	const dispatch = useDispatch();

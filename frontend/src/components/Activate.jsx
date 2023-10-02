@@ -11,15 +11,16 @@ const Activate = () => {
 
   function handleClick() {
     const userData = { uid, token };
-    dispatch(activate(userData));
-    setIsActivated(true)
+    dispatch(activate(userData)).then(() => setIsActivated(true));
   }
-  if(isActivated){
-    navigate('/')
+  if (isActivated) {
+    navigate("/");
   }
   return (
     <>
-      <button className="text-[#00df9a] text-center" onClick={handleClick}>Activate</button>
+      <button className="text-[#00df9a] text-center" onClick={handleClick}>
+        Activate
+      </button>
     </>
   );
 };
