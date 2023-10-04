@@ -32,10 +32,12 @@ const Login = () => {
     if (isSuccess || user) {
       navigate("/feed");
     }
-    if (isAuthenticated() && isSuccess) {
-      dispatch(load());
-    } else {
-      console.log("JWT is not valid");
+    if (isSuccess) {
+      if (isAuthenticated()) {
+        dispatch(load());
+      } else {
+        console.log("JWT is not valid");
+      }
     }
 
     // dispatch(reset());
