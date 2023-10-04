@@ -13,6 +13,7 @@ import "react-multi-carousel/lib/styles.css";
 export default function FeedPage() {
 	const dispatch = useDispatch();
 	const [cardData, setCardData] = useState([]);
+	const [revCardData, setRevCardData] = useState([]);
 
 	const { user, isSuccess } = useSelector((state) => state.auth);
 	const responsive = {
@@ -23,7 +24,7 @@ export default function FeedPage() {
 		},
 		desktop: {
 			breakpoint: { max: 3000, min: 1024 },
-			items: 3,
+			items: 4,
 		},
 		tablet: {
 			breakpoint: { max: 1024, min: 464 },
@@ -48,8 +49,8 @@ export default function FeedPage() {
 			"https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/"
 		);
 		const data = await res.json();
-		console.log(data);
 		setCardData(data);
+		setRevCardData(cardData.reverse());
 	}
 	useEffect(() => {
 		getCardData();
@@ -58,24 +59,47 @@ export default function FeedPage() {
 	return !cardData ? (
 		<h1 className="text-[#00df9a]">Data is Being Fetched</h1>
 	) : (
-		<div className="px-8 mx-3 lg:mx-auto my-4 text-white">
+		<div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
 			{/* <Search /> */}
-			<div className="flex w-full justify-center lg:justify-start">
-				<h1 className="text-2xl font-semibold">Trending</h1>
+			<div>
+				<div className="flex w-full justify-center lg:justify-start my-3">
+					<h1 className="text-2xl font-semibold">
+						Trending Projects
+					</h1>
+				</div>
+				<Carousel responsive={responsive} itemClass="pr-6">
+					{cardData.map((project) => {
+						return (
+							<Link
+								to={"/project/" + project.id}
+								key={project.id}
+							>
+								<FeedCard {...project} />
+							</Link>
+						);
+					})}
+				</Carousel>
 			</div>
-			<Carousel
-				responsive={responsive}
-				itemClass="carousel-item-margin-40-px"
-			>
-				{cardData.map((project) => {
-					return (
-						<Link to={"/project/" + project.id} key={project.id}>
-							<FeedCard {...project} />
-						</Link>
-					);
-				})}
-			</Carousel>
 
+			<div>
+				<div className="flex w-full justify-center lg:justify-start my-3">
+					<h1 className="text-2xl font-semibold">
+						Recommended For You{" "}
+					</h1>
+				</div>
+				<Carousel responsive={responsive} itemClass="pr-6">
+					{revCardData.map((project) => {
+						return (
+							<Link
+								to={"/project/" + project.id}
+								key={project.id}
+							>
+								<FeedCard {...project} />
+							</Link>
+						);
+					})}
+				</Carousel>
+			</div>
 			{/* <div
 				className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-6 lg:gap-7 xl:gap-8
 			"
