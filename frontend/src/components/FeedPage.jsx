@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Shimmer from "./Shimmer";
 
 export default function FeedPage() {
 	const dispatch = useDispatch();
@@ -50,14 +51,14 @@ export default function FeedPage() {
 		);
 		const data = await res.json();
 		setCardData(data);
-		setRevCardData(cardData.reverse());
+		setRevCardData(data);
 	}
 	useEffect(() => {
 		getCardData();
 	}, []);
 
-	return !cardData ? (
-		<h1 className="text-[#00df9a]">Data is Being Fetched</h1>
+	return cardData.length === 0 ? (
+		<Shimmer />
 	) : (
 		<div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
 			{/* <Search /> */}
@@ -80,25 +81,30 @@ export default function FeedPage() {
 					})}
 				</Carousel>
 			</div>
-
 			<div>
-				<div className="flex w-full justify-center lg:justify-start my-3">
-					<h1 className="text-2xl font-semibold">
-						Recommended For You{" "}
-					</h1>
-				</div>
-				<Carousel responsive={responsive} itemClass="pr-6">
-					{revCardData.map((project) => {
-						return (
-							<Link
-								to={"/project/" + project.id}
-								key={project.id}
-							>
-								<FeedCard {...project} />
-							</Link>
-						);
-					})}
-				</Carousel>
+				{revCardData.length === 0 ? (
+					<Shimmer />
+				) : (
+					<>
+						<div className="flex w-full justify-center lg:justify-start my-3">
+							<h1 className="text-2xl font-semibold">
+								Recommended For You{" "}
+							</h1>
+						</div>
+						<Carousel responsive={responsive} itemClass="pr-6">
+							{revCardData.map((project) => {
+								return (
+									<Link
+										to={"/project/" + project.id}
+										key={project.id}
+									>
+										<FeedCard {...project} />
+									</Link>
+								);
+							})}
+						</Carousel>
+					</>
+				)}
 			</div>
 			{/* <div
 				className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-6 lg:gap-7 xl:gap-8
