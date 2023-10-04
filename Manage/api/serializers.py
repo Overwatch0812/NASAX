@@ -5,7 +5,7 @@ from account.models import CustomUser
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    author=serializers.SlugRelatedField(
+    email=serializers.SlugRelatedField(
         queryset=CustomUser.objects.all(), slug_field='email'
     )
     class Meta:

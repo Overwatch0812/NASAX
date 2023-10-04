@@ -50,7 +50,7 @@ const projectSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {
-    reset: (state) => {
+    resetProject: (state) => {
       (state.projects = null),
         (state.projectDetail = null),
         (state.isFetched = false),
@@ -102,5 +102,5 @@ const projectSlice = createSlice({
   },
 });
 
-export const { reset } = projectSlice.actions;
+export const { resetProject } = projectSlice.actions;
 export default projectSlice.reducer;

@@ -3,24 +3,27 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../features/projects/projectSlice";
+import { resetProject } from "../features/projects/projectSlice";
 import { fetchProjectApiData } from "../features/projects/projectSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [cardData, setCardData] = useState([]);
 
-  const { user, isSuccess } = useSelector((state) => state.auth);
+  const { user, isSuccess, isUserLoaded, IsError } = useSelector(
+    (state) => state.auth
+  );
 
   //
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (isUserLoaded) {
       dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
     }
-  }, [user, isSuccess]);
+  }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
   return !cardData ? (
     <Spinner />

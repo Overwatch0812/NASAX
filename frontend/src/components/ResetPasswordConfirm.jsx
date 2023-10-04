@@ -18,9 +18,15 @@ const ResetPasswordConfirm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data={uid, token,new_password, re_new_password}
-    dispatch(resetPasswordConfirm(data)).then((e)=>{console.log(e)})
-    setPasswordChanged(true);
+    if (new_password === re_new_password) {
+      const data = { uid, token, new_password, re_new_password };
+      dispatch(resetPasswordConfirm(data)).then((e) => {
+        console.log(e);
+      });
+      setPasswordChanged(true);
+    } else {
+      alert("Password not Matching");
+    }
   };
 
   if (passwordChanged) {

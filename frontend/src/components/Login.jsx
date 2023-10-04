@@ -22,14 +22,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    dispatch(login(userData)).then(() => {
-      if (isAuthenticated()) {
-        dispatch(load());
-        dispatch(reset());
-      } else {
-        console.log("JWT is not valid");
-      }
-    });
+    dispatch(login(userData));
   };
 
   useEffect(() => {
@@ -39,9 +32,14 @@ const Login = () => {
     if (isSuccess || user) {
       navigate("/feed");
     }
+    if (isAuthenticated() && isSuccess) {
+      dispatch(load());
+    } else {
+      console.log("JWT is not valid");
+    }
 
-    dispatch(reset());
-  }, [user, IsError, isSuccess, dispatch, navigate]);
+    // dispatch(reset());
+  }, [IsError, isSuccess, dispatch, navigate]);
 
   const onChange = (e) =>
     setFormData({
