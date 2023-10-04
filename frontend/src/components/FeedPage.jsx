@@ -24,7 +24,9 @@ export default function FeedPage() {
 	// }, [user, isSuccess]);
 
 	async function getCardData() {
-		const res = await fetch("https://campusx-api.vercel.app/api/");
+		const res = await fetch(
+			"https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/"
+		);
 		const data = await res.json();
 		console.log(data);
 		setCardData(data);
@@ -36,10 +38,10 @@ export default function FeedPage() {
 	return !cardData ? (
 		<h1 className="text-[#00df9a]">Data is Being Fetched</h1>
 	) : (
-		<div className="max-w-[1200px]  mx-3 lg:mx-auto  flex flex-col text-white">
+		<div className="px-4 mx-3 lg:mx-auto flex flex-col text-white">
 			<Search />
 			<div
-				className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-6 lg:gap-7 xl:gap-8
+				className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-6 lg:gap-7 xl:gap-8
 			"
 			>
 				{cardData.map((project) => {

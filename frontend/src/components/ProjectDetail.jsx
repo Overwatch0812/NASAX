@@ -19,7 +19,9 @@ const ProjectDetail = () => {
 	// }, []);
 
 	async function getProjectById() {
-		const res = await fetch(`https://campusx-api.vercel.app/api/${id}/`);
+		const res = await fetch(
+			`https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/${id}/`
+		);
 		const data = await res.json();
 		console.log(data);
 		setProjectDetail(data);

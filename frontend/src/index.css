@@ -16,4 +16,17 @@
     .no-scroll::-webkit-scrollbar {
         display: none;
       }
+
+    .text-content
+    {
+        position: absolute;
+        z-index: 10;
+        bottom: -100%;
+        background-color: #ffffffc0;
+    }
+
+    .card:hover .text-content
+    {
+        bottom: 0;
+    }
 }
