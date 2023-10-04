@@ -26,7 +26,7 @@ export default function FeedPage() {
   }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
   return !cardData ? (
-    <Spinner />
+    <h1 className="text-[#00df9a]">Data is Being Fetched</h1>
   ) : (
     <div className="max-w-[1200px]  mx-3 lg:mx-auto  flex flex-col text-white">
       <Search />
