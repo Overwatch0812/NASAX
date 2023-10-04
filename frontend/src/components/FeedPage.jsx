@@ -23,11 +23,11 @@ export default function FeedPage() {
 		},
 		desktop: {
 			breakpoint: { max: 3000, min: 1024 },
-			items: 5,
+			items: 3,
 		},
 		tablet: {
 			breakpoint: { max: 1024, min: 464 },
-			items: 2,
+			items: 1,
 		},
 		mobile: {
 			breakpoint: { max: 464, min: 0 },
@@ -58,9 +58,15 @@ export default function FeedPage() {
 	return !cardData ? (
 		<h1 className="text-[#00df9a]">Data is Being Fetched</h1>
 	) : (
-		<div className="px-8 mx-3 lg:mx-auto flex flex-col text-white">
+		<div className="px-8 mx-3 lg:mx-auto my-4 text-white">
 			{/* <Search /> */}
-			<Carousel responsive={responsive}>
+			<div className="flex w-full justify-center lg:justify-start">
+				<h1 className="text-2xl font-semibold">Trending</h1>
+			</div>
+			<Carousel
+				responsive={responsive}
+				itemClass="carousel-item-margin-40-px"
+			>
 				{cardData.map((project) => {
 					return (
 						<Link to={"/project/" + project.id} key={project.id}>

@@ -4,7 +4,11 @@ import axios from "axios";
 export default function FeedCard(props) {
 	return (
 		<div className=" flex flex-col h-[350px] overflow-scroll no-scroll">
-			<img src={props.thumbnail} alt="" className="rounded-t-md" />
+			<img
+				src={props.thumbnail}
+				alt=""
+				className="rounded-md h-[300px] object-cover"
+			/>
 			<div>
 				<div className="flex flex-col gap-3">
 					<div>
