@@ -1,7 +1,7 @@
 import ShimmerCard from "./ShimmerCard";
 const Shimmer = () => {
 	return (
-		<div className="flex">
+		<div className="flex gap-3">
 			{Array(8)
 				.fill("")
 				.map((ele, i) => (

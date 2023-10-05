@@ -58,7 +58,9 @@ export default function FeedPage() {
 	}, []);
 
 	return cardData.length === 0 ? (
-		<Shimmer />
+		<div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
+			<Shimmer />
+		</div>
 	) : (
 		<div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
 			{/* <Search /> */}
@@ -83,7 +85,9 @@ export default function FeedPage() {
 			</div>
 			<div>
 				{revCardData.length === 0 ? (
-					<Shimmer />
+					<div className="flex w-full justify-center lg:justify-start my-3">
+						<Shimmer />
+					</div>
 				) : (
 					<>
 						<div className="flex w-full justify-center lg:justify-start my-3">
