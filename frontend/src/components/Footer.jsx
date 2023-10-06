@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	FaDribbbleSquare,
 	FaFacebookSquare,
@@ -5,9 +6,20 @@ import {
 	FaInstagram,
 	FaTwitterSquare,
 } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+
 const Footer = () => {
+	// const { user, isUserLoaded } = useSelector((state) => state.auth);
+	const [user, setUser] = useState(true);
+
 	return (
-		<div className="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300">
+		<div
+			className={
+				user
+					? "max-w-[1540px] mx-auto py-16 grid lg:grid-cols-3 gap-8 text-gray-300"
+					: "max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300"
+			}
+		>
 			<div>
 				<h1 className="w-full text-3xl font-bold text-[#00df9a]">
 					CampusX.

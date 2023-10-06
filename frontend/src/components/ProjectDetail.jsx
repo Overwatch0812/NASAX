@@ -19,7 +19,9 @@ const ProjectDetail = () => {
 	// }, []);
 
 	async function getProjectById() {
-		const res = await fetch(`https://campusx-api.vercel.app/api/${id}/`);
+		const res = await fetch(
+			`https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/${id}/`
+		);
 		const data = await res.json();
 		console.log(data);
 		setProjectDetail(data);
@@ -35,23 +37,33 @@ const ProjectDetail = () => {
 	return !projectDetail ? (
 		<Spinner />
 	) : (
-		<>
-			<img src={projectDetail.thumbnail} />
-			<h1 className="text-white">{projectDetail.title}</h1>
-			<h1 className="text-white">{projectDetail.author}</h1>
-			<h1 className="text-white">{projectDetail.description}</h1>
-			<h1 className="text-white">{projectDetail.domain}</h1>
-			<h1 className="text-white">{projectDetail.languages_used}</h1>
-			<Link className="text-white" to={projectDetail.pdf}>
-				Report
-			</Link>
-			<Link className="text-white" to={projectDetail.codes}>
-				Code
-			</Link>
-			<Link className="text-white" to={projectDetail.txt}>
-				Text Files
-			</Link>
-		</>
+		<div className="max-w-[1200px]  mx-3 lg:mx-auto flex flex-col text-white">
+			<div className="flex flex-col gap-3">
+				<img src={projectDetail.thumbnail} />
+				<h1 className=" text-3xl font-semibold">
+					{projectDetail.title}
+				</h1>
+				<div className="flex justify-between">
+					<h1 className=" text-xl">{projectDetail.author}</h1>
+					<div className="flex gap-3 align-middle text-baseGreen">
+						<h1 className="">{projectDetail.domain}</h1>
+						<h1 className="">{projectDetail.languages_used}</h1>
+					</div>
+				</div>
+				<h1 className="">{projectDetail.description}</h1>
+			</div>
+			<div className="w-full flex items-center justify-center gap-4">
+				<Link className="text-baseGreen" to={projectDetail.pdf}>
+					<button className="text-xl bg-white">Report</button>
+				</Link>
+				<Link className="text-baseGreen" to={projectDetail.codes}>
+					<button className="text-xl bg-white">Code</button>
+				</Link>
+				<Link className="text-baseGreen" to={projectDetail.txt}>
+					<button className="text-xl bg-white">Text Files</button>
+				</Link>
+			</div>
+		</div>
 	);
 };
 
