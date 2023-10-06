@@ -14,16 +14,14 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-
-//   const { user, isUserLoaded } = useSelector((state) => state.auth);
-  const [user, setUser] = useState(true);
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    dispatch(resetProject());
-    navigate("/login");
-  };
-
+	const { user, isUserLoaded } = useSelector((state) => state.auth);
+	//   const [user, setUser] = useState(true);
+	const handleLogout = () => {
+		dispatch(logout());
+		dispatch(reset());
+		dispatch(resetProject());
+		navigate("/login");
+	};
 
 	return (
 		<>

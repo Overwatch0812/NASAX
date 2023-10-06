@@ -12,12 +12,11 @@ import "react-multi-carousel/lib/styles.css";
 import Shimmer from "./Shimmer";
 
 export default function FeedPage() {
-
 	const dispatch = useDispatch();
 	const [cardData, setCardData] = useState([]);
 	const [revCardData, setRevCardData] = useState([]);
-
-	const { user, isSuccess } = useSelector((state) => state.auth);
+	const navigate = useNavigate();
+	// const { user, isSuccess } = useSelector((state) => state.auth);
 	const responsive = {
 		superLargeDesktop: {
 			// the naming can be any, depends on you.
@@ -39,22 +38,17 @@ export default function FeedPage() {
 	};
 	//
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [cardData, setCardData] = useState([]);
+	const { user, isSuccess, isUserLoaded, IsError } = useSelector(
+		(state) => state.auth
+	);
 
-  const { user, isSuccess, isUserLoaded, IsError } = useSelector(
-    (state) => state.auth
-  );
+	//
 
-  //
-
-
-  useEffect(() => {
-    if (isUserLoaded) {
-      dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
-    }
-  }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
+	useEffect(() => {
+		if (isUserLoaded) {
+			dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
+		}
+	}, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
 	async function getCardData() {
 		const res = await fetch(
@@ -135,5 +129,4 @@ export default function FeedPage() {
 			</div> */}
 		</div>
 	);
-
 }
