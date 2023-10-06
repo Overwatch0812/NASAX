@@ -7,7 +7,7 @@ const user = localStorage.getItem("access");
 const initialState = {
   user: user ? user : null,
   isError: false,
-  isSuccess: false,
+  isSuccess: user ? true : false,
   isLoading: false,
   isUserLoaded: false,
   isProjectApiFetched: false,

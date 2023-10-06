@@ -11,7 +11,7 @@ class project(models.Model):
     thumbnail = models.ImageField(
         upload_to='images/thumbnail', null=True, blank=True)
     title = models.CharField(max_length=250, null=False, blank=False)
-    author = models.ForeignKey(
+    email = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     domain = models.CharField(max_length=250)

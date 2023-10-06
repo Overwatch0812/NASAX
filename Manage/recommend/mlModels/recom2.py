@@ -2,28 +2,28 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem.porter import PorterStemmer
-
-def recommend_projects(csv_file):
+from recommend.mlModels.find import find_project
+def recommend_projects(f_project_name, csv_file, input_user_id, input_user_domain):
     try:
         # Load the CSV data into a Pandas DataFrame
         data = pd.read_csv(csv_file)
 
         def con_word(val):
-            val = val.replace("'", "").replace(" ","").replace("-", "").replace("/", "")
+            val = val.replace("'", "").replace(" ", "").replace("-", "").replace("/", "")
             return val.replace("]", "").replace("[", "").split(",")
 
         data["Skills_Required"] = data["Skills_Required"].apply(con_word)
         data["Skills"] = data["Skills"].apply(con_word)
 
         def con_id(val):
-            val = val.replace("_","")
+            val = val.replace("_", "")
             return val
 
         data["Project_ID"] = data["Project_ID"].apply(con_id)
         data["User_ID"] = data["User_ID"].apply(con_id)
 
         def rm_space(val):
-            val = val.replace(" ","")
+            val = val.replace(" ", "")
             return val
 
         data["Category"] = data["Category"].apply(rm_space)
@@ -90,13 +90,18 @@ def recommend_projects(csv_file):
                 recommendations.append((project_id, project_name, category))
             return recommendations
 
-        return recommend
+        project_recommendations = recommend(f_project_name)
+
+        if project_recommendations:
+            print("Recommendations:")
+            for project_id, project_name, category in project_recommendations:
+                print(f'Project ID: {project_id}, Project Name: {project_name}, Category: {category}')
+        else:
+            print('No recommendations found.')
 
     except FileNotFoundError:
         print(f"Error: File '{csv_file}' not found.")
-        return None
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return None
 
 

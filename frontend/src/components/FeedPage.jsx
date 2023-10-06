@@ -3,15 +3,16 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../features/projects/projectSlice";
+import { resetProject } from "../features/projects/projectSlice";
 import { fetchProjectApiData } from "../features/projects/projectSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Shimmer from "./Shimmer";
 
 export default function FeedPage() {
+
 	const dispatch = useDispatch();
 	const [cardData, setCardData] = useState([]);
 	const [revCardData, setRevCardData] = useState([]);
@@ -38,12 +39,22 @@ export default function FeedPage() {
 	};
 	//
 
-	// useEffect(() => {
-	// 	if (isSuccess || user) {
-	// 		dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
-	// 		console.log(cardData);
-	// 	}
-	// }, [user, isSuccess]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [cardData, setCardData] = useState([]);
+
+  const { user, isSuccess, isUserLoaded, IsError } = useSelector(
+    (state) => state.auth
+  );
+
+  //
+
+
+  useEffect(() => {
+    if (isUserLoaded) {
+      dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
+    }
+  }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
 	async function getCardData() {
 		const res = await fetch(
@@ -124,4 +135,5 @@ export default function FeedPage() {
 			</div> */}
 		</div>
 	);
+
 }

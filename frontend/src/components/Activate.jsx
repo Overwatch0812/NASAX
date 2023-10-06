@@ -1,4 +1,4 @@
-import activate from "../features/auth/authSlice";
+import { activate } from "../features/auth/authSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";

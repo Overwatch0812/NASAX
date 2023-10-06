@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import { isAuthenticated } from "../features/auth/authService";
+import { resetProject } from "../features/projects/projectSlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
@@ -13,14 +14,16 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	// const { user, isUserLoaded } = useSelector((state) => state.auth);
-	const [user, setUser] = useState(true);
-	console.log(user);
-	const handleLogout = () => {
-		dispatch(logout());
-		dispatch(reset());
-		navigate("/login");
-	};
+
+//   const { user, isUserLoaded } = useSelector((state) => state.auth);
+  const [user, setUser] = useState(true);
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    dispatch(resetProject());
+    navigate("/login");
+  };
+
 
 	return (
 		<>

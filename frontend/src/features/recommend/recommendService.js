@@ -9,7 +9,7 @@ const Recommend = async (detail) => {
   const url =
     "http://127.0.0.1:8000/recommend/" + detail.id + "/" + detail.domain + "/";
   try {
-    const response = await axios.get(url, detail, config);
+    const response = await axios.get(url, config);
     return response.data;
   } catch (error) {
     console.log(error);

@@ -6,7 +6,7 @@ export const fetchProjectData = async () => {
       "Content-Type": "application/json",
     },
   };
-  const Url = "https://campusx-api.vercel.app/api/";
+  const Url = "https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/";
   try {
     const res = await axios.get(Url, config);
     return res.data;
@@ -21,7 +21,8 @@ export const FetchProjectDetail = async (id) => {
       "Content-Type": "application/json",
     },
   };
-  const Url = "https://campusx-api.vercel.app/api/" + id + "/";
+  const Url =
+    "https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/" + id + "/";
   try {
     const res = await axios.get(Url, config);
     return res.data;
