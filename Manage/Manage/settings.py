@@ -200,7 +200,6 @@ DJOSER = {
         'user_create': 'account.serializers.UserCreateSerializer',
         'user': 'account.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
-        'activation': 'djoser.email.ActivationEmail',
     }
 }
 
