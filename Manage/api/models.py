@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from cloudinary_storage.storage import RawMediaCloudinaryStorage
-
+from django.contrib.postgres.fields import ArrayField
+import json
 User = get_user_model()
 
 # Create your models here.
@@ -17,10 +18,13 @@ class project(models.Model):
     type_of_collaborator=models.CharField(max_length=250, null=True, blank=True)
     level_of_expertise_of_collaborator=models.CharField(max_length=250, null=True, blank=True)
     domain = models.CharField(max_length=250, null=True, blank=True)
-    tech_stack = models.CharField(max_length=100, null=True, blank=True)
+    tech_stack = models.JSONField(encoder=json.JSONEncoder,null=True, blank=True)
     github_link = models.CharField(max_length=250, null=True, blank=True)
-    tasks = models.CharField(max_length=250, null=True, blank=True)
+    tasks = models.JSONField(encoder=json.JSONEncoder,null=True, blank=True)
     
 
     def __str__(self):
         return self.title
+    def img(self):
+        if self.thumbnail:
+            return u'<img src="%s"/>' % self.thumbnail.url
