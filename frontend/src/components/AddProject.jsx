@@ -33,6 +33,7 @@ export default function AddProject() {
     { value: "Pro", label: "Pro" },
   ];
 
+
   const domains = [
     { value: "AI", label: "AI" },
     { value: "Web Development", label: "Web Development" },
@@ -72,6 +73,7 @@ export default function AddProject() {
   // 	console.log(techstack);
   // };
 
+
   const handleServiceChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...tasks];
@@ -89,6 +91,7 @@ export default function AddProject() {
     setServiceList([...tasks, { service: "" }]);
   };
 
+
   const onSubmit = (e) => {
     e.preventDefault();
     const userData = JSON.stringify({
@@ -102,6 +105,7 @@ export default function AddProject() {
       domain,
       email,
     });
+
 
     // console.log(userData);
     // console.log(usrData);

@@ -1,5 +1,7 @@
 import { useState, Fragment } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { BiUserCircle } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import { isAuthenticated } from "../features/auth/authService";
@@ -35,6 +37,48 @@ const Navbar = () => {
     navigate("/login");
   };
 
+	return (
+		<>
+			<div
+				className={
+					user
+						? "flex justify-between items-center h-24 mx-auto px-4 pt-1 text-white bg-black1"
+						: "flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 pt-1 text-white bg-black1"
+				}
+			>
+				<h1 className="w-full text-4xl font-bold text-[#00df9a]">
+					<Link to="/">NASAX.</Link>
+				</h1>
+				<ul className="hidden md:flex  items-center uppercase">
+					{user ? (
+						<>
+							<li className="p-4 md:text-xl">
+								<Link to="/">Home</Link>
+							</li>
+							<li className="p-4 md:text-xl">
+								<Link to="/feed">About</Link>
+							</li>
+							<li className="p-4 md:text-xl">
+								<Link
+									to={
+										"/recommend/" +
+										user.id +
+										"/" +
+										user.domain +
+										"/"
+									}
+								>
+									Projects
+								</Link>
+							</li>
+							<li className="p-4 md:text-xl">
+								<Link to="/search">
+									{<FiSearch size={25} />}
+								</Link>
+							</li>
+							<li className="p-4 md:text-xl">
+								{/* <button
+
   return (
     <>
       <div
@@ -64,6 +108,7 @@ const Navbar = () => {
               <li className="p-4 md:text-xl">Contact</li>
               <li className="p-4 md:text-xl">
                 {/* <button
+
 									id="dropdownInformationButton"
 									data-dropdown-toggle="dropdownInformation"
 									className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -134,16 +179,23 @@ const Navbar = () => {
 										</a>
 									</div>
 								</div> */}
-                <Menu as="div" className="relative inline-block text-left">
-                  <div>
-                    <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                      USER
-                      <ChevronDownIcon
-                        className="-mr-1 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                  </div>
+
+								<Menu
+									as="div"
+									className="relative inline-block text-left"
+								>
+									<div>
+										<Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 group">
+											<div className="text-white group-hover:text-black">
+												<BiUserCircle size={25} />
+											</div>
+											<ChevronDownIcon
+												className="-mr-1 h-5 w-5 text-gray-400"
+												aria-hidden="true"
+											/>
+										</Menu.Button>
+									</div>
+
 
                   <Transition
                     as={Fragment}

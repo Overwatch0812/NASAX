@@ -8,20 +8,20 @@ const Homes = () => {
 	return (
 		<>
 			<div className="text-white bg-black1">
-				<div className="max-w-[850px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
+				<div className="max-w-[1000px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
 					<p className="text-[#00df9a] font-bold p-2">
 						GROWING BY LEARNING
 					</p>
 					<h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-6">
 						Grow with projects.
 					</h1>
-					<div className="flex justify-center items-center">
+					<div className="flex justify-center items-center ">
 						<p className="md:text-5xl sm:text-4xl text-xl font-bold py-4">
-							Project Collaboration in
+							Project Collaboration with
 						</p>
 						<Typed
 							className="md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2"
-							strings={["Colleges", "University"]}
+							strings={["Innovators", "Researchers", "Scientist"]}
 							typeSpeed={190}
 							backSpeed={140}
 							loop

@@ -22,6 +22,7 @@ import Recommend from "./components/recommend";
 import AddProject from "./components/AddProject";
 import ProfileDashboard from "./components/ProfileDashboard";
 import MyProjects from "./components/MyProjects";
+import Search from "./components/Search";
 // TODO:Create Shimmer
 function App() {
 	return (
@@ -40,7 +41,7 @@ function App() {
 				<Route path="/add" element={<AddProject />} />
 				<Route path="/dashboard" element={<ProfileDashboard />} />
 				<Route path="/myprojects" element={<MyProjects />} />
-
+				<Route path="/search" element={<Search />} />
 				<Route
 					path="/password/reset/confirm/:uid/:token"
 					element={<ResetPasswordConfirm />}

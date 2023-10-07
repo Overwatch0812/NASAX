@@ -50,17 +50,19 @@ export default function FeedPage() {
     }
   }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
-  async function getCardData() {
-    const res = await fetch(
-      "https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
-    );
-    const data = await res.json();
-    setCardData(data);
-    setRevCardData(data);
-  }
-  useEffect(() => {
-    getCardData();
-  }, []);
+
+	async function getCardData() {
+		const res = await fetch(
+			"https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
+		);
+		const data = await res.json();
+		setCardData(data);
+		setRevCardData(data);
+	}
+	useEffect(() => {
+		getCardData();
+	}, []);
+
 
   return cardData.length === 0 ? (
     <div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
