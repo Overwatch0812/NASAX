@@ -20,7 +20,8 @@ import PLS from "./components/plsActivate";
 import ProjectDetail from "./components/ProjectDetail";
 import Recommend from "./components/recommend";
 import AddProject from "./components/AddProject";
-
+import ProfileDashboard from "./components/ProfileDashboard";
+import MyProjects from "./components/MyProjects";
 // TODO:Create Shimmer
 function App() {
 	return (
@@ -37,6 +38,9 @@ function App() {
 				<Route path="/project/:id" element={<ProjectDetail />} />
 				<Route path="/recommend/:id/:domain" element={<Recommend />} />
 				<Route path="/add" element={<AddProject />} />
+				<Route path="/dashboard" element={<ProfileDashboard />} />
+				<Route path="/myprojects" element={<MyProjects />} />
+
 				<Route
 					path="/password/reset/confirm/:uid/:token"
 					element={<ResetPasswordConfirm />}
