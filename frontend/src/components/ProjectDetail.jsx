@@ -6,33 +6,34 @@ import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 
 const ProjectDetail = () => {
-	const dispatch = useDispatch();
-	const [projectDetail, setProjectDetail] = useState(null);
-	const { id } = useParams();
+  const dispatch = useDispatch();
+  const [projectDetail, setProjectDetail] = useState(null);
+  const { id } = useParams();
 
-	// useEffect(() => {
-	// 	if (id) {
-	// 		dispatch(fetchProjectDetail(id)).then((e) =>
-	// 			setProjectDetail(e.payload)
-	// 		);
-	// 	}
-	// }, []);
+  // useEffect(() => {
+  // 	if (id) {
+  // 		dispatch(fetchProjectDetail(id)).then((e) =>
+  // 			setProjectDetail(e.payload)
+  // 		);
+  // 	}
+  // }, []);
 
-	async function getProjectById() {
-		const res = await fetch(
-			`https://manage-leszjnj0o-overwatch0812.vercel.app/api/${id}/`
-		);
-		const data = await res.json();
-		console.log(data);
-		setProjectDetail(data);
-	}
 
-	useEffect(() => {
-		if (id) {
-			getProjectById();
-		}
-	}, []);
-	console.log(projectDetail);
+  async function getProjectById() {
+    const res = await fetch(
+      `https://manage-leszjnj0o-overwatch0812.vercel.app/api/${id}/`
+    );
+    const data = await res.json();
+    console.log(data);
+    setProjectDetail(data);
+  }
+
+  useEffect(() => {
+    if (id) {
+      getProjectById();
+    }
+  }, []);
+  console.log(projectDetail);
 
 	return !projectDetail ? (
 		<Spinner />
@@ -116,6 +117,7 @@ const ProjectDetail = () => {
 			</div> */}
 		</div>
 	);
+
 };
 
 export default ProjectDetail;

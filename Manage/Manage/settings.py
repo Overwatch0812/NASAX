@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-@zatipuuo5mw4kjt^9d3(b8u_-)l@32r0h79_i+cf4kxhvznj)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'home',
-    'recommend',
+    'suggestion'
 ]
 
 CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:8000', 'http://localhost:5173')

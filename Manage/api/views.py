@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.views import APIView
+from django.http import HttpResponse
 from .models import project
 from .serializers import ProjectSerializer
 
@@ -34,12 +36,22 @@ class DeleteApiView(generics.DestroyAPIView):
         super().perform_destroy(instance)
 
 
-class UpdateApiView(generics.UpdateAPIView):
+class UpdateApiView(APIView):
     permission_classes = (AllowAny,)
-    queryset=project.objects.all()
-    serializer_class=ProjectSerializer
-    lookup_field='pk'
+    def post(self,request,format=None):
+        serializer=ProjectSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return HttpResponse("Default Response")
+
+class UserWithProject(APIView):
+    def get(self, request, id, format=None):
+        try:
+            project_instance = project.objects.filter(email=id)
+            serializer = ProjectSerializer(project_instance,many=True)
+            return HttpResponse(serializer.data)
+        except project.DoesNotExist:
+            return HttpResponse({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
     
+
     
-    def perform_update(self,serializer):
-        instance=serializer.save()

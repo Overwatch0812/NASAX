@@ -1,12 +1,14 @@
 import axios from "axios";
 
+
 const BACKEND_DOMAIN = "https://manage-leszjnj0o-overwatch0812.vercel.app";
+
 
 const REGISTER_URL = `${BACKEND_DOMAIN}/auth/users/`;
 const User_data = `${BACKEND_DOMAIN}/auth/users/me/`;
 const LOGIN_URL = `${BACKEND_DOMAIN}/auth/jwt/create/`;
 const Verify_Jwt = `${BACKEND_DOMAIN}/auth/jwt/verify/`;
-const ACTIVATION_URL = "http://127.0.0.1:8000/auth/users/activation/";
+const ACTIVATION_URL = `${BACKEND_DOMAIN}/auth/users/activation/`;
 const email_to_reset_password = `${BACKEND_DOMAIN}/auth/users/reset_password/`;
 const reset_password_confirm_url = `${BACKEND_DOMAIN}/auth/users/reset_password_confirm/`;
 const USERNAME_RESET_CONFIRM_URL = `${BACKEND_DOMAIN}/auth/users/`;

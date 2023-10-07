@@ -14,28 +14,28 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 function classNames(...classes) {
-	return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = () => {
-	const [nav, setNav] = useState(false);
+  const [nav, setNav] = useState(false);
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-	const { user, isUserLoaded } = useSelector((state) => state.auth);
-	//   const [user, setUser] = useState(true);
+  const { user, isUserLoaded } = useSelector((state) => state.auth);
+  //   const [user, setUser] = useState(true);
 
-	const options = ["Profile", "My Projects", "three"];
+  const options = ["Profile", "My Projects", "three"];
 
-	const defaultOption = options[0];
+  const defaultOption = options[0];
 
-	const handleLogout = () => {
-		dispatch(logout());
-		dispatch(reset());
-		dispatch(resetProject());
-		navigate("/login");
-	};
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    dispatch(resetProject());
+    navigate("/login");
+  };
 
 	return (
 		<>
@@ -78,6 +78,37 @@ const Navbar = () => {
 							</li>
 							<li className="p-4 md:text-xl">
 								{/* <button
+
+  return (
+    <>
+      <div
+        className={
+          user
+            ? "flex justify-between items-center h-24 mx-auto px-4 pt-1 text-white bg-black1"
+            : "flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 pt-1 text-white bg-black1"
+        }
+      >
+        <h1 className="w-full text-4xl font-bold text-[#00df9a]">
+          <Link to="/">CampusX.</Link>
+        </h1>
+        <ul className="hidden md:flex  items-center uppercase">
+          {user ? (
+            <>
+              <li className="p-4 md:text-xl">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                <Link to="/feed">About</Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                <Link to={"/recommend/" + user.id + "/" + user.domain + "/"}>
+                  Projects
+                </Link>
+              </li>
+              <li className="p-4 md:text-xl">Contact</li>
+              <li className="p-4 md:text-xl">
+                {/* <button
+
 									id="dropdownInformationButton"
 									data-dropdown-toggle="dropdownInformation"
 									className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -100,7 +131,7 @@ const Navbar = () => {
 										/>
 									</svg>
 								</button> */}
-								{/* <div
+                {/* <div
 									id="dropdownInformation"
 									className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
 								>
@@ -148,6 +179,7 @@ const Navbar = () => {
 										</a>
 									</div>
 								</div> */}
+
 								<Menu
 									as="div"
 									className="relative inline-block text-left"
@@ -164,72 +196,71 @@ const Navbar = () => {
 										</Menu.Button>
 									</div>
 
-									<Transition
-										as={Fragment}
-										enter="transition ease-out duration-100"
-										enterFrom="transform opacity-0 scale-95"
-										enterTo="transform opacity-100 scale-100"
-										leave="transition ease-in duration-75"
-										leaveFrom="transform opacity-100 scale-100"
-										leaveTo="transform opacity-0 scale-95"
-									>
-										<Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-											<div className="py-1">
-												<Menu.Item>
-													{({ active }) => (
-														<Link
-															to="/myprojects"
-															// onClick={
-															// 	handleLogout
-															// }
-															className={classNames(
-																active
-																	? "bg-gray-100 text-gray-900"
-																	: "text-gray-700",
-																"block px-4 py-2 text-sm"
-															)}
-														>
-															My Projects
-														</Link>
-													)}
-												</Menu.Item>
 
-												<Menu.Item>
-													{({ active }) => (
-														<Link
-															to="/dashboard"
-															className={classNames(
-																active
-																	? "bg-gray-100 text-gray-900"
-																	: "text-gray-700",
-																"block px-4 py-2 text-sm"
-															)}
-														>
-															Profile
-														</Link>
-													)}
-												</Menu.Item>
-											</div>
-											<div className="py-1">
-												<Menu.Item>
-													{({ active }) => (
-														<Link
-															to="/"
-															onClick={
-																handleLogout
-															}
-															className={classNames(
-																active
-																	? "bg-gray-100 text-gray-900"
-																	: "text-gray-700",
-																"block px-4 py-2 text-sm"
-															)}
-														>
-															Logout
-														</Link>
-													)}
-												</Menu.Item>
-												{/* <Menu.Item>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/myprojects"
+                              // onClick={
+                              // 	handleLogout
+                              // }
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              My Projects
+                            </Link>
+                          )}
+                        </Menu.Item>
+
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/dashboard"
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              Profile
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      </div>
+                      <div className="py-1">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/"
+                              onClick={handleLogout}
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              Logout
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        {/* <Menu.Item>
 													{({ active }) => (
 														<a
 															href="#"
@@ -244,8 +275,8 @@ const Navbar = () => {
 														</a>
 													)}
 												</Menu.Item> */}
-											</div>
-											{/* <div className="py-1">
+                      </div>
+                      {/* <div className="py-1">
 												<Menu.Item>
 													{({ active }) => (
 														<a
@@ -294,76 +325,73 @@ const Navbar = () => {
 													)}
 												</Menu.Item>
 											</div> */}
-										</Menu.Items>
-									</Transition>
-								</Menu>
-							</li>
-						</>
-					) : (
-						<div className="flex justify-center items-center gap-4">
-							<li className="p-4 md:text-xl">
-								<Link to="/login">Login</Link>
-							</li>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </li>
+            </>
+          ) : (
+            <div className="flex justify-center items-center gap-4">
+              <li className="p-4 md:text-xl">
+                <Link to="/login">Login</Link>
+              </li>
 
-							<li className="p-4 md:text-xl">
-								<Link to="/signup">SignUp</Link>
-							</li>
-						</div>
-					)}
-				</ul>
-				<div className="block md:hidden">
-					{nav ? (
-						<AiOutlineClose
-							size={20}
-							onClick={() => setNav(false)}
-						/>
-					) : (
-						<AiOutlineMenu size={20} onClick={() => setNav(true)} />
-					)}
-				</div>
-				{nav && (
-					<ul className="fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500">
-						{user ? (
-							<>
-								<Link to="/">
-									<button className="w-full text-3xl font-bold text-[#00df9a] m-4">
-										CampusX.
-									</button>
-								</Link>
-								<li className="p-4 md:text-xl">
-									<Link to="/">Home</Link>
-								</li>
-								<li className="p-4 md:text-xl">
-									<Link to="/feed">About</Link>
-								</li>
-								<li className="p-4 md:text-xl">Contact</li>
-								<li className="p-4 md:text-xl">
-									<Link to="/" onClick={handleLogout}>
-										LogOut
-									</Link>
-								</li>
-							</>
-						) : (
-							<>
-								<Link to="/">
-									<button className="w-full text-3xl font-bold text-[#00df9a] m-4">
-										CampusX.
-									</button>
-								</Link>
-								<li className="p-4 md:text-xl">
-									<Link to="/login">Login</Link>
-								</li>
+              <li className="p-4 md:text-2xl">
+                <Link to="/signup">SignUp</Link>
+              </li>
+            </div>
+          )}
+        </ul>
+        <div className="block md:hidden">
+          {nav ? (
+            <AiOutlineClose size={20} onClick={() => setNav(false)} />
+          ) : (
+            <AiOutlineMenu size={20} onClick={() => setNav(true)} />
+          )}
+        </div>
+        {nav && (
+          <ul className="fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500">
+            {user ? (
+              <>
+                <Link to="/">
+                  <button className="w-full text-3xl font-bold text-[#00df9a] m-4">
+                    CampusX.
+                  </button>
+                </Link>
+                <li className="p-4 md:text-xl">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="p-4 md:text-xl">
+                  <Link to="/feed">About</Link>
+                </li>
+                <li className="p-4 md:text-xl">Contact</li>
+                <li className="p-4 md:text-xl">
+                  <Link to="/" onClick={handleLogout}>
+                    LogOut
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <Link to="/">
+                  <button className="w-full text-3xl font-bold text-[#00df9a] m-4">
+                    CampusX.
+                  </button>
+                </Link>
+                <li className="p-4 md:text-xl">
+                  <Link to="/login">Login</Link>
+                </li>
 
-								<li className="p-4 md:text-xl">
-									<Link to="/signup">Sign Up</Link>
-								</li>
-							</>
-						)}
-					</ul>
-				)}
-			</div>
-		</>
-	);
+                <li className="p-4 md:text-xl">
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              </>
+            )}
+          </ul>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Navbar;

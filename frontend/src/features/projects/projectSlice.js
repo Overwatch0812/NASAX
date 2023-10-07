@@ -7,6 +7,8 @@ const initialState = {
   isFetched: false,
   isFetching: false,
   isErrror: false,
+  uploads: false,
+  isUploaded: false,
 };
 
 export const fetchProjectApiData = createAsyncThunk(
@@ -46,6 +48,26 @@ export const fetchProjectDetail = createAsyncThunk(
     }
   }
 );
+
+export const UploadProject = createAsyncThunk(
+  "projects/UploadProject",
+  async (userData) => {
+    try {
+      const response = await projectService.UploadProject(userData);
+      if (!response) {
+        console.log("Cannot Access Api");
+      }
+      return response;
+    } catch (error) {
+      const message =
+        (error.response && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const projectSlice = createSlice({
   name: "projects",
   initialState,
@@ -55,7 +77,9 @@ const projectSlice = createSlice({
         (state.projectDetail = null),
         (state.isFetched = false),
         (state.isErrror = false),
-        (state.isFetching = false);
+        (state.isFetching = false),
+        (state.uploads = false),
+        (state.isUploaded = false);
     },
   },
   extraReducers: (builder) => {
@@ -98,6 +122,21 @@ const projectSlice = createSlice({
           (state.projectDetail = null),
           (state.isFetched = false),
           (state.isErrror = true);
+      })
+      .addCase(UploadProject.pending, (state) => {
+        (state.uploads = false),
+          (state.isUploaded = false),
+          (state.isErrror = false);
+      })
+      .addCase(UploadProject.fulfilled, (state, action) => {
+        (state.uploads = action.payload),
+          (state.isUploaded = true),
+          (state.isErrror = false);
+      })
+      .addCase(UploadProject.rejected, (state, action) => {
+        (state.uploads = false),
+          (state.isUploaded = false),
+          (state.isErrror = action.payload);
       });
   },
 });
