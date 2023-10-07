@@ -50,12 +50,29 @@ export default function AddProject() {
 	const [techstack, setTechstack] = useState([]);
 	const [collaborators, setCollaborators] = useState(null);
 	const [expertise, setExpertise] = useState(null);
-
+	const [serviceList, setServiceList] = useState([{ service: null }]);
 	// const handleTech = (selectedOption) => {
 	// 	console.log(selectedOption);
 	// 	setTechstack(selectedOption);
 	// 	console.log(techstack);
 	// };
+
+	const handleServiceChange = (e, index) => {
+		const { name, value } = e.target;
+		const list = [...serviceList];
+		list[index][name] = value;
+		setServiceList(list);
+	};
+
+	const handleServiceRemove = (index) => {
+		const list = [...serviceList];
+		list.splice(index, 1);
+		setServiceList(list);
+	};
+
+	const handleServiceAdd = () => {
+		setServiceList([...serviceList, { service: "" }]);
+	};
 
 	const onSubmit = (e) => {};
 	return (
@@ -93,9 +110,9 @@ export default function AddProject() {
 							<div className="flex items-center gap-4">
 								<label
 									htmlFor="imageFile"
-									className="text-white"
+									className="text-white text-lg"
 								>
-									Thumbnail
+									Project Thumbnail
 								</label>
 								<input
 									type="file"
@@ -133,7 +150,55 @@ export default function AddProject() {
 							placeholder="Techstack"
 							onChange={(e) => setTechstack(e)}
 						/>
-						{console.log(collaborators)}
+						<label htmlFor="service" className="text-white text-lg">
+							Tasks(s)
+						</label>
+						{serviceList.map((singleService, index) => (
+							<div key={index} className="services">
+								<div className="first-division text-white gap-3">
+									<input
+										name="service"
+										type="text"
+										id="service"
+										value={singleService.service}
+										onChange={(e) =>
+											handleServiceChange(e, index)
+										}
+										className="text-black w-full px-3 py-2 rounded-md"
+										required
+									/>
+									<div className="flex gap-3 my-2">
+										{serviceList.length - 1 === index &&
+											serviceList.length < 4 && (
+												<button
+													type="button"
+													onClick={handleServiceAdd}
+													className="add-btn"
+												>
+													<span>Add a Task</span>
+												</button>
+											)}
+										<div className="second-division text-white">
+											{serviceList.length !== 1 && (
+												<button
+													type="button"
+													onClick={() =>
+														handleServiceRemove(
+															index
+														)
+													}
+													className="remove-btn"
+												>
+													<span>Remove</span>
+												</button>
+											)}
+											{console.log(serviceList)}
+										</div>
+									</div>
+								</div>
+							</div>
+						))}
+
 						<button
 							type="submit"
 							className="text-black bg-[#00df9a] py-2 px-3 rounded-md"
