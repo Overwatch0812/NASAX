@@ -50,6 +50,8 @@ export default function AddProject() {
 	const [techstack, setTechstack] = useState([]);
 	const [collaborators, setCollaborators] = useState(null);
 	const [expertise, setExpertise] = useState(null);
+	const [thumbnail, setThumbnail] = useState(null);
+
 	const [serviceList, setServiceList] = useState([{ service: null }]);
 	// const handleTech = (selectedOption) => {
 	// 	console.log(selectedOption);
@@ -118,6 +120,7 @@ export default function AddProject() {
 									type="file"
 									id="imageFile"
 									accept="image/*"
+									onChange={(e) => e.target.files[0]}
 								/>
 							</div>
 							<input
