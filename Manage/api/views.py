@@ -43,3 +43,4 @@ class UpdateApiView(generics.UpdateAPIView):
     
     def perform_update(self,serializer):
         instance=serializer.save()
+
