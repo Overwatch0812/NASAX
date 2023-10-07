@@ -29,7 +29,6 @@ const Navbar = () => {
   const options = ["Profile", "My Projects", "three"];
 
   const defaultOption = options[0];
-
   const handleLogout = () => {
     dispatch(logout());
     dispatch(reset());
@@ -37,47 +36,37 @@ const Navbar = () => {
     navigate("/login");
   };
 
-	return (
-		<>
-			<div
-				className={
-					user
-						? "flex justify-between items-center h-24 mx-auto px-4 pt-1 text-white bg-black1"
-						: "flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 pt-1 text-white bg-black1"
-				}
-			>
-				<h1 className="w-full text-4xl font-bold text-[#00df9a]">
-					<Link to="/">NASAX.</Link>
-				</h1>
-				<ul className="hidden md:flex  items-center uppercase">
-					{user ? (
-						<>
-							<li className="p-4 md:text-xl">
-								<Link to="/">Home</Link>
-							</li>
-							<li className="p-4 md:text-xl">
-								<Link to="/feed">About</Link>
-							</li>
-							<li className="p-4 md:text-xl">
-								<Link
-									to={
-										"/recommend/" +
-										user.id +
-										"/" +
-										user.domain +
-										"/"
-									}
-								>
-									Projects
-								</Link>
-							</li>
-							<li className="p-4 md:text-xl">
-								<Link to="/search">
-									{<FiSearch size={25} />}
-								</Link>
-							</li>
-							<li className="p-4 md:text-xl">
-								{/* <button
+  return (
+    <>
+      <div
+        className={
+          user
+            ? "flex justify-between items-center h-24 mx-auto px-4 pt-1 text-white bg-black1"
+            : "flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 pt-1 text-white bg-black1"
+        }
+      >
+        <h1 className="w-full text-4xl font-bold text-[#00df9a]">
+          <Link to="/">NASAX.</Link>
+        </h1>
+        <ul className="hidden md:flex  items-center uppercase">
+          {user ? (
+            <>
+              <li className="p-4 md:text-xl">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                <Link to="/feed">About</Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                <Link to={"/recommend/" + user.id + "/" + user.domain + "/"}>
+                  Projects
+                </Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                <Link to="/search">{<FiSearch size={25} />}</Link>
+              </li>
+              <li className="p-4 md:text-xl">
+                {/* <button
 
   return (
     <>
@@ -180,22 +169,18 @@ const Navbar = () => {
 									</div>
 								</div> */}
 
-								<Menu
-									as="div"
-									className="relative inline-block text-left"
-								>
-									<div>
-										<Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 group">
-											<div className="text-white group-hover:text-black">
-												<BiUserCircle size={25} />
-											</div>
-											<ChevronDownIcon
-												className="-mr-1 h-5 w-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</Menu.Button>
-									</div>
-
+                <Menu as="div" className="relative inline-block text-left">
+                  <div>
+                    <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 group">
+                      <div className="text-white group-hover:text-black">
+                        <BiUserCircle size={25} />
+                      </div>
+                      <ChevronDownIcon
+                        className="-mr-1 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </Menu.Button>
+                  </div>
 
                   <Transition
                     as={Fragment}
@@ -211,7 +196,7 @@ const Navbar = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/myprojects"
+                              to={"/myprojects/" + user.id}
                               // onClick={
                               // 	handleLogout
                               // }

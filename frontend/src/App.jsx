@@ -1,9 +1,9 @@
 import "./App.css";
 import {
-	createBrowserRouter,
-	RouterProvider,
-	Route,
-	Routes,
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Routes,
 } from "react-router-dom";
 
 import Signup from "./components/Signup";
@@ -25,31 +25,31 @@ import MyProjects from "./components/MyProjects";
 import Search from "./components/Search";
 // TODO:Create Shimmer
 function App() {
-	return (
-		<>
-			<Navbar />
-			<Routes>
-				<Route path="/" element={<Homes />} />
-				<Route path="/signup" element={<Signup />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/feed" element={<FeedPage />} />
-				<Route path="/lobby" element={<PLS />} />
-				<Route path="/activate/:uid/:token" element={<Activate />} />
-				<Route path="/reset-password" element={<ResetPassword />} />
-				<Route path="/project/:id" element={<ProjectDetail />} />
-				<Route path="/recommend/:id/:domain" element={<Recommend />} />
-				<Route path="/add" element={<AddProject />} />
-				<Route path="/dashboard" element={<ProfileDashboard />} />
-				<Route path="/myprojects" element={<MyProjects />} />
-				<Route path="/search" element={<Search />} />
-				<Route
-					path="/password/reset/confirm/:uid/:token"
-					element={<ResetPasswordConfirm />}
-				/>
-			</Routes>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homes />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/lobby" element={<PLS />} />
+        <Route path="/activate/:uid/:token" element={<Activate />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/recommend/:id/:domain" element={<Recommend />} />
+        <Route path="/add" element={<AddProject />} />
+        <Route path="/dashboard" element={<ProfileDashboard />} />
+        <Route path="/myprojects/:id" element={<MyProjects />} />
+        <Route path="/search" element={<Search />} />
+        <Route
+          path="/password/reset/confirm/:uid/:token"
+          element={<ResetPasswordConfirm />}
+        />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
