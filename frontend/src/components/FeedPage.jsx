@@ -12,10 +12,11 @@ import "react-multi-carousel/lib/styles.css";
 import Shimmer from "./Shimmer";
 
 export default function FeedPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cardData, setCardData] = useState([]);
   const [revCardData, setRevCardData] = useState([]);
-
+  // const { user, isSuccess } = useSelector((state) => state.auth);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -36,8 +37,6 @@ export default function FeedPage() {
     },
   };
   //
-
-  const navigate = useNavigate();
 
   const { user, isSuccess, isUserLoaded, IsError } = useSelector(
     (state) => state.auth
