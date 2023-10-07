@@ -52,7 +52,7 @@ export default function FeedPage() {
 
 	async function getCardData() {
 		const res = await fetch(
-			"https://manage-kxtdoqvh3-overwatch0812.vercel.app/api/"
+			"https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
 		);
 		const data = await res.json();
 		setCardData(data);

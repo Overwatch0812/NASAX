@@ -32,6 +32,16 @@ export default function AddProject() {
 		{ value: "Pro", label: "Pro" },
 	];
 
+	const domains = [
+		{ value: "AI", label: "AI" },
+		{ value: "Web Development", label: "Web Development" },
+		{ value: "VR", label: "VR" },
+		{ value: "Android Development", label: "Android Development" },
+		{ value: "Big Data", label: "Big Data" },
+		{ value: "Cybersecurity", label: "Cybersecurity" },
+		{ value: "Network-Security", label: "Network-Security" },
+	];
+
 	const tech = [
 		{ value: "React", label: "React" },
 		{ value: "Python", label: "Python" },
@@ -45,12 +55,15 @@ export default function AddProject() {
 	];
 
 	const [title, setTitle] = useState("");
-	const [desc, setDesc] = useState("");
+	const [description, setDesc] = useState("");
 	const [gitlink, setGitLink] = useState("");
 	const [techstack, setTechstack] = useState([]);
 	const [collaborators, setCollaborators] = useState(null);
 	const [expertise, setExpertise] = useState(null);
 	const [thumbnail, setThumbnail] = useState(null);
+
+	const [text, setText] = useState("");
+	const maxWords = 50;
 
 	const [serviceList, setServiceList] = useState([{ service: null }]);
 	// const handleTech = (selectedOption) => {
@@ -99,16 +112,26 @@ export default function AddProject() {
 								required
 								className="lg:basis-1/2 py-2 px-3 rounded-md"
 							/>
+							{/* <Select
+								options={typeOfCollaborators}
+								value={typeOfCollaborators.value}
+								// defaultValue={typeOfCollaborators[0]}
+								placeholder="Preffered Collaborator"
+								onChange={(e) => setCollaborators(e.value)}
+							/> */}
 							<textarea
 								name="description"
 								id=""
 								cols="30"
 								rows="10"
 								placeholder="Add description"
-								value={desc}
 								className="px-3 py-2 rounded-md"
-								onChange={(e) => setDesc(e.target.value)}
+								value={description}
+								onChange={(e) => {
+									setDesc(e.target.value);
+								}}
 							></textarea>
+
 							<div className="flex items-center gap-4">
 								<label
 									htmlFor="imageFile"

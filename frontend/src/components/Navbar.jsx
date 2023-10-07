@@ -1,5 +1,7 @@
 import { useState, Fragment } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { BiUserCircle } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import { isAuthenticated } from "../features/auth/authService";
@@ -45,7 +47,7 @@ const Navbar = () => {
 				}
 			>
 				<h1 className="w-full text-4xl font-bold text-[#00df9a]">
-					<Link to="/">CampusX.</Link>
+					<Link to="/">NASAX.</Link>
 				</h1>
 				<ul className="hidden md:flex  items-center uppercase">
 					{user ? (
@@ -69,7 +71,11 @@ const Navbar = () => {
 									Projects
 								</Link>
 							</li>
-							<li className="p-4 md:text-xl">Contact</li>
+							<li className="p-4 md:text-xl">
+								<Link to="/search">
+									{<FiSearch size={25} />}
+								</Link>
+							</li>
 							<li className="p-4 md:text-xl">
 								{/* <button
 									id="dropdownInformationButton"
@@ -147,8 +153,10 @@ const Navbar = () => {
 									className="relative inline-block text-left"
 								>
 									<div>
-										<Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-											USER
+										<Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 group">
+											<div className="text-white group-hover:text-black">
+												<BiUserCircle size={25} />
+											</div>
 											<ChevronDownIcon
 												className="-mr-1 h-5 w-5 text-gray-400"
 												aria-hidden="true"
