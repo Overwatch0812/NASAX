@@ -50,6 +50,8 @@ export default function AddProject() {
 	const [techstack, setTechstack] = useState([]);
 	const [collaborators, setCollaborators] = useState(null);
 	const [expertise, setExpertise] = useState(null);
+	const [thumbnail, setThumbnail] = useState(null);
+
 	const [serviceList, setServiceList] = useState([{ service: null }]);
 	// const handleTech = (selectedOption) => {
 	// 	console.log(selectedOption);
@@ -118,7 +120,19 @@ export default function AddProject() {
 									type="file"
 									id="imageFile"
 									accept="image/*"
+									onChange={(e) => e.target.files[0]}
 								/>
+							</div>
+							<div className="">
+								<input
+									type="text"
+									placeholder="Author Name"
+									className="lg:basis-1/2 w-full py-2 px-3 rounded-md"
+									onChange={(e) => setGitLink(e.target.value)}
+								/>
+								<p className="text-white">
+									Should be same as the user signed in.
+								</p>
 							</div>
 							<input
 								type="url"
