@@ -51,7 +51,9 @@ export default function FeedPage() {
   }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
   async function getCardData() {
-    const res = await fetch("http://127.0.0.1:8000/api/");
+    const res = await fetch(
+      "https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
+    );
     const data = await res.json();
     setCardData(data);
     setRevCardData(data);

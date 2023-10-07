@@ -6,7 +6,7 @@ export const fetchProjectData = async () => {
       "Content-Type": "application/json",
     },
   };
-  const Url = "http://127.0.0.1:8000/api/";
+  const Url = "https://manage-leszjnj0o-overwatch0812.vercel.app/api/";
   try {
     const res = await axios.get(Url, config);
     return res.data;
@@ -21,7 +21,8 @@ export const FetchProjectDetail = async (id) => {
       "Content-Type": "application/json",
     },
   };
-  const Url = "http://127.0.0.1:8000/api/" + id + "/";
+  const Url =
+    "https://manage-leszjnj0o-overwatch0812.vercel.app/api/" + id + "/";
   try {
     const res = await axios.get(Url, config);
     return res.data;
@@ -36,7 +37,7 @@ export const UploadProject = async (userData) => {
       "Content-Type": "application/json",
     },
   };
-  const Url = "http://127.0.0.1:8000/api/create/";
+  const Url = "https://manage-leszjnj0o-overwatch0812.vercel.app/api/create/";
   try {
     const res = await axios.post(Url, userData, config);
     return res.data;

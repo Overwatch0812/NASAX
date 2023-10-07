@@ -33,6 +33,16 @@ export default function AddProject() {
     { value: "Pro", label: "Pro" },
   ];
 
+  const domains = [
+    { value: "AI", label: "AI" },
+    { value: "Web Development", label: "Web Development" },
+    { value: "VR", label: "VR" },
+    { value: "Android Development", label: "Android Development" },
+    { value: "Big Data", label: "Big Data" },
+    { value: "Cybersecurity", label: "Cybersecurity" },
+    { value: "Network-Security", label: "Network-Security" },
+  ];
+
   const tech = [
     { value: "React", label: "React" },
     { value: "Python", label: "Python" },
@@ -53,6 +63,9 @@ export default function AddProject() {
   const [level_of_expertise_of_collaborator, setExpertise] = useState(null);
   const [tasks, setServiceList] = useState([{ service: "" }]);
   const [thumbnail, setImg] = useState(null);
+  const [thumbnailUrl, setUrl] = useState(null);
+  const [domain, setDomain] = useState(null);
+  const [email, setAuthor] = useState("");
   // const handleTech = (selectedOption) => {
   // 	console.log(selectedOption);
   // 	setTechstack(selectedOption);
@@ -78,7 +91,7 @@ export default function AddProject() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const userData = {
+    const userData = JSON.stringify({
       title,
       description,
       github_link,
@@ -86,10 +99,13 @@ export default function AddProject() {
       level_of_expertise_of_collaborator,
       type_of_collaborator,
       tasks,
-      thumbnail,
-    };
+      domain,
+      email,
+    });
+
     // console.log(userData);
-    dispatch(UploadProject(userData));
+    // console.log(usrData);
+    dispatch(UploadProject(userData)).then((e) => console.log(e));
   };
   return (
     <div>
@@ -124,24 +140,30 @@ export default function AddProject() {
                 className="px-3 py-2 rounded-md"
                 onChange={(e) => setDesc(e.target.value)}
               ></textarea>
-              <div className="flex items-center gap-4">
-                <label htmlFor="imageFile" className="text-white text-lg">
-                  Project Thumbnail
-                </label>
+
+              <div className="">
                 <input
-                  type="file"
-                  id="imageFile"
-                  accept="image/*"
-                  onChange={(e) => {
-                    setImg(e.target.files[0]);
-                  }}
+                  type="text"
+                  placeholder="Author Name"
+                  className="lg:basis-1/2 w-full py-2 px-3 rounded-md"
+                  onChange={(e) => setAuthor(e.target.value)}
                 />
+                <p className="text-white">
+                  Should be same as the user signed in.
+                </p>
               </div>
               <input
                 type="url"
                 placeholder="Github Repository Link"
                 className="lg:basis-1/2 py-2 px-3 rounded-md"
                 onChange={(e) => setGitLink(e.target.value)}
+              />
+              <Select
+                options={domains}
+                value={domains.value}
+                // defaultValue={typeOfCollaborators[0]}
+                placeholder="Domain"
+                onChange={(e) => setDomain(e.value)}
               />
             </div>
             <Select

@@ -19,7 +19,9 @@ const ProjectDetail = () => {
   // }, []);
 
   async function getProjectById() {
-    const res = await fetch(`http://127.0.0.1:8000/api/${id}/`);
+    const res = await fetch(
+      `https://manage-leszjnj0o-overwatch0812.vercel.app/api/${id}/`
+    );
     const data = await res.json();
     console.log(data);
     setProjectDetail(data);
