@@ -9,9 +9,9 @@ const initialState = {
 
 export const recommend = createAsyncThunk(
   "recommendations/Recommend",
-  async (detail) => {
+  async (id) => {
     try {
-      const dataz = await recommendService.Recommend(detail);
+      const dataz = await recommendService.Recommend(id);
       if (!dataz) {
         console.log("Cannot Access Api");
       }
@@ -35,6 +35,24 @@ const RecommendationSlice = createSlice({
         (state.isError = false),
         (state.isSuccess = false);
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(recommend.pending, (state) => {
+        (state.isRecommend = true),
+          (state.isSuccess = false),
+          (state.isError = false);
+      })
+      .addCase(recommend.fulfilled, (state, action) => {
+        (state.isRecommend = action.payload),
+          (state.isSuccess = true),
+          (state.isError = false);
+      })
+      .addCase(recommend.rejected, (state, action) => {
+        (state.isRecommend = false),
+          (state.isFetched = false),
+          (state.isError = action.payload);
+      });
   },
 });
 

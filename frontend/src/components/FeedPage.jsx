@@ -10,6 +10,7 @@ import Spinner from "./Spinner";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Shimmer from "./Shimmer";
+import { recommend } from "../features/recommend/recommendSlice";
 
 export default function FeedPage() {
   const navigate = useNavigate();
@@ -47,22 +48,21 @@ export default function FeedPage() {
   useEffect(() => {
     if (isUserLoaded) {
       dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
+      dispatch(recommend(user.id)).then((e) => console.log(e));
     }
   }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
-
-	async function getCardData() {
-		const res = await fetch(
-			"https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
-		);
-		const data = await res.json();
-		setCardData(data);
-		setRevCardData(data);
-	}
-	useEffect(() => {
-		getCardData();
-	}, []);
-
+  async function getCardData() {
+    const res = await fetch(
+      "https://manage-leszjnj0o-overwatch0812.vercel.app/api/"
+    );
+    const data = await res.json();
+    setCardData(data);
+    setRevCardData(data);
+  }
+  useEffect(() => {
+    getCardData();
+  }, []);
 
   return cardData.length === 0 ? (
     <div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
@@ -75,7 +75,7 @@ export default function FeedPage() {
         <div className="flex w-full justify-center lg:justify-start my-3">
           <h1 className="text-2xl font-semibold">Trending Projects</h1>
         </div>
-        <Carousel responsive={responsive} itemClass="pr-6">
+        {/* <Carousel responsive={responsive} itemClass="pr-6">
           {cardData.map((project) => {
             return (
               <Link to={"/project/" + project.id} key={project.id}>
@@ -83,19 +83,19 @@ export default function FeedPage() {
               </Link>
             );
           })}
-        </Carousel>
+        </Carousel> */}
       </div>
       <div>
         {revCardData.length === 0 ? (
           <div className="flex w-full justify-center lg:justify-start my-3">
-            <Shimmer />
+            {/* <Shimmer /> */}
           </div>
         ) : (
           <>
             <div className="flex w-full justify-center lg:justify-start my-3">
               <h1 className="text-2xl font-semibold">Recommended For You </h1>
             </div>
-            <Carousel responsive={responsive} itemClass="pr-6">
+            {/* <Carousel responsive={responsive} itemClass="pr-6">
               {revCardData.map((project) => {
                 return (
                   <Link to={"/project/" + project.id} key={project.id}>
@@ -103,7 +103,7 @@ export default function FeedPage() {
                   </Link>
                 );
               })}
-            </Carousel>
+            </Carousel> */}
           </>
         )}
       </div>
