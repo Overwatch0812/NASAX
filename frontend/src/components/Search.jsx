@@ -64,7 +64,13 @@ export default function Search() {
 								? project
 								: project.title
 										.toLowerCase()
-										.includes(search.toLowerCase());
+										.includes(search.toLowerCase()) ||
+										project.domain
+											.toLowerCase()
+											.includes(search.toLowerCase()) ||
+										project.level_of_expertise_of_collaborator
+											.toLowerCase()
+											.includes(search.toLowerCase());
 						})
 						.map((project) => {
 							return (

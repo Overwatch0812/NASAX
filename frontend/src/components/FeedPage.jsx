@@ -44,8 +44,6 @@ export default function FeedPage() {
     (state) => state.recommendations
   );
 
-  //
-
   useEffect(() => {
     if (isUserLoaded) {
       dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
