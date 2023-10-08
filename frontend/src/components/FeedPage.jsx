@@ -13,37 +13,37 @@ import Shimmer from "./Shimmer";
 import { recommend } from "../features/recommend/recommendSlice";
 
 export default function FeedPage() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [cardData, setCardData] = useState([]);
-  const [revCardData, setRevCardData] = useState([]);
-  // const { user, isSuccess } = useSelector((state) => state.auth);
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  //
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const [cardData, setCardData] = useState([]);
+	const [revCardData, setRevCardData] = useState([]);
+	// const { user, isSuccess } = useSelector((state) => state.auth);
+	const responsive = {
+		superLargeDesktop: {
+			// the naming can be any, depends on you.
+			breakpoint: { max: 4000, min: 3000 },
+			items: 5,
+		},
+		desktop: {
+			breakpoint: { max: 3000, min: 1024 },
+			items: 4,
+		},
+		tablet: {
+			breakpoint: { max: 1024, min: 464 },
+			items: 1,
+		},
+		mobile: {
+			breakpoint: { max: 464, min: 0 },
+			items: 1,
+		},
+	};
+	//
 
-  const { user, isSuccess, isUserLoaded, IsError } = useSelector(
-    (state) => state.auth
-  );
+	const { user, isSuccess, isUserLoaded, IsError } = useSelector(
+		(state) => state.auth
+	);
 
-  //
+
 
   useEffect(() => {
     if (isUserLoaded) {
@@ -119,6 +119,6 @@ export default function FeedPage() {
 					);
 				})}
 			</div> */}
-    </div>
-  );
+		</div>
+	);
 }
