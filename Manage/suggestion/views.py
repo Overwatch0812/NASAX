@@ -72,7 +72,7 @@ class Suggest(generics.ListAPIView):
         suggested_users, suggested_projects = get_recommendations(csv_data1,csv_data2,val, id)
         # print(suggested_users)
         # print(suggested_projects)
-        data={'1':suggested_users,'2':suggested_projects}
+        data={'a':suggested_users,'b':suggested_projects}
         # to convert into csv
         # print(data)
         return Response(data)

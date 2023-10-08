@@ -58,9 +58,7 @@ const Navbar = () => {
                 <Link to="/feed">About</Link>
               </li>
               <li className="p-4 md:text-xl">
-                <Link to={"/recommend/" + user.id + "/" + user.domain + "/"}>
-                  Projects
-                </Link>
+                <Link to="/feed">Projects</Link>
               </li>
               <li className="p-4 md:text-xl">
                 <Link to="/search">{<FiSearch size={25} />}</Link>

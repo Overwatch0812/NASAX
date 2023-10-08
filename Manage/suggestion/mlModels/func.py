@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import linear_kernel
 
 # print(len(creator_df))
 
-def generate_user_recommendations(creator_df, contributors_df, contributor_index, num_recommendations=8):
+def generate_user_recommendations(creator_df, contributors_df, contributor_index, num_recommendations=5):
     # Combine data for freelancers and contributors
     creator_df["Data"] = creator_df["domain"] + creator_df["level_of_expertise_of_collaborator"] + creator_df["type_of_collaborator"] + creator_df["description"]
     f_df = creator_df[["Data"]]

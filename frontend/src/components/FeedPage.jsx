@@ -39,8 +39,9 @@ export default function FeedPage() {
   };
   //
 
-  const { user, isSuccess, isUserLoaded, IsError } = useSelector(
-    (state) => state.auth
+  const { user, isSuccess, isUserLoaded } = useSelector((state) => state.auth);
+  const { isRecommend, IsError } = useSelector(
+    (state) => state.recommendations
   );
 
   //
@@ -48,7 +49,7 @@ export default function FeedPage() {
   useEffect(() => {
     if (isUserLoaded) {
       dispatch(fetchProjectApiData()).then((e) => setCardData(e.payload));
-      dispatch(recommend(user.id)).then((e) => console.log(e));
+      dispatch(recommend(user.id)).then((e) => setRevCardData(e.payload.b));
     }
   }, [isUserLoaded, user, IsError, isSuccess, dispatch, navigate]);
 
@@ -58,13 +59,15 @@ export default function FeedPage() {
     );
     const data = await res.json();
     setCardData(data);
-    setRevCardData(data);
   }
   useEffect(() => {
     getCardData();
   }, []);
+  console.log(revCardData);
 
-  return cardData.length === 0 ? (
+  //
+  // return <h1>hello</h1>;
+  return revCardData.length === 0 ? (
     <div className="px-8 mx-3 lg:mx-auto my-4 text-white w-full flex flex-col gap-8">
       <Shimmer />
     </div>
@@ -75,7 +78,7 @@ export default function FeedPage() {
         <div className="flex w-full justify-center lg:justify-start my-3">
           <h1 className="text-2xl font-semibold">Trending Projects</h1>
         </div>
-        {/* <Carousel responsive={responsive} itemClass="pr-6">
+        <Carousel responsive={responsive} itemClass="pr-6">
           {cardData.map((project) => {
             return (
               <Link to={"/project/" + project.id} key={project.id}>
@@ -83,7 +86,7 @@ export default function FeedPage() {
               </Link>
             );
           })}
-        </Carousel> */}
+        </Carousel>
       </div>
       <div>
         {revCardData.length === 0 ? (
@@ -95,7 +98,7 @@ export default function FeedPage() {
             <div className="flex w-full justify-center lg:justify-start my-3">
               <h1 className="text-2xl font-semibold">Recommended For You </h1>
             </div>
-            {/* <Carousel responsive={responsive} itemClass="pr-6">
+            <Carousel responsive={responsive} itemClass="pr-6">
               {revCardData.map((project) => {
                 return (
                   <Link to={"/project/" + project.id} key={project.id}>
@@ -103,7 +106,7 @@ export default function FeedPage() {
                   </Link>
                 );
               })}
-            </Carousel> */}
+            </Carousel>
           </>
         )}
       </div>
