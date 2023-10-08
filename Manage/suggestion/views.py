@@ -20,8 +20,12 @@ from .mlModels.func import get_recommendations
 
 class Suggest(generics.ListAPIView):
     permission_classes = (AllowAny,)
+    def get_queryset(self):
+        queryset=User.objects.all()
+        return queryset
+    
 
-    def get(self, request, id=17):
+    def get(self, request, id):
         # to get current users data
         User = CustomUser.objects.get(id=id)
         jsonDataAllUser = UserSerializer(User)
@@ -55,6 +59,8 @@ class Suggest(generics.ListAPIView):
         csv_writer2.writerows(dataUser)
         csv_data2 = csv_buffer2.getvalue()
         csv_buffer2.close()
+        # print(csv_data1)
+        # print(csv_data2)
         # output_csv_file_path = 'contributors_data.csv'
         # with open(output_csv_file_path, 'w', newline='') as csv_file:
         #     csv_file.write(csv_data2)
@@ -62,9 +68,14 @@ class Suggest(generics.ListAPIView):
         # main func call
         csv_data1 = pd.read_csv(StringIO(csv_data1))
         csv_data2 = pd.read_csv(StringIO(csv_data2))
-        print(get_recommendations(csv_data1,csv_data2,val, id))
+        # print(get_recommendations(csv_data1,csv_data2,val, id))
+        suggested_users, suggested_projects = get_recommendations(csv_data1,csv_data2,val, id)
+        # print(suggested_users)
+        # print(suggested_projects)
+        data={'1':suggested_users,'2':suggested_projects}
         # to convert into csv
-        # 
+        # print(data)
+        return Response(data)
         # StringData1 = StringIO(csv_data1)
         # df1 = pd.read_csv(StringData1, sep=";")
         # StringData2 = StringIO(csv_data2)
@@ -104,5 +115,3 @@ class Suggest(generics.ListAPIView):
 
         # print(f'CSV data saved to {output_csv_file_path}')
 
-        
-        return HttpResponse("cha mudi padi hai bhai")

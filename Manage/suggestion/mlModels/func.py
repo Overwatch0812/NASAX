@@ -1,28 +1,19 @@
 import pandas as pd
+import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
-
+# print(len(creator_df))
 
 def generate_user_recommendations(creator_df, contributors_df, contributor_index, num_recommendations=8):
     # Combine data for freelancers and contributors
-    # creator_df["Data"] = creator_df["domain"] + creator_df["level"] + creator_df["type"] + creator_df["project_description"]
-    # f_df = creator_df[["Data"]]
-    # f1_df = creator_df[["creator_id"]]
-
-    # contributors_df["Data"] = contributors_df["domain"] + contributors_df["level"] + contributors_df["type"] + contributors_df["skills"] + contributors_df["education"]
-    # c_df = contributors_df[["Data"]]
-    # c1_df = contributors_df[["name"]]
-
-    # def format
-
-    creator_df["Data"] = creator_df["description"]
+    creator_df["Data"] = creator_df["domain"] + creator_df["level_of_expertise_of_collaborator"] + creator_df["type_of_collaborator"] + creator_df["description"]
     f_df = creator_df[["Data"]]
-    f1_df = creator_df[["email"]]
+    output_data = creator_df["email"] + creator_df["description"] + creator_df["domain"]
 
-    contributors_df["Data"] = contributors_df["full_name"] + contributors_df["domain"] + contributors_df["branch"] + contributors_df["preferred_language"] + contributors_df["level_of_understanding_of_preferred_language"] + contributors_df["university"] + contributors_df["academic_year"]
+    contributors_df["Data"] = contributors_df["domain"] + contributors_df["level_of_understanding_of_preferred_language"] + contributors_df["preferred_language"]
     c_df = contributors_df[["Data"]]
-    c1_df = contributors_df[["full_name"]]
+    # c1_df = contributors_df[["name"]]
 
     # Create a TF-IDF vectorizer
     tfidf_vectorizer = TfidfVectorizer()
@@ -36,10 +27,16 @@ def generate_user_recommendations(creator_df, contributors_df, contributor_index
     # print(cosine_similarities)
     # Generate recommendations
     creator_indices = cosine_similarities[contributor_index].argsort()[:-num_recommendations-1:-1]
-    recommendations = f1_df.iloc[creator_indices]
+    recommendations = creator_df.iloc[creator_indices]
     # print(recommendations)
-    result = recommendations['email'].tolist()
-    return result
+
+    # Convert DataFrame rows to JSON objects
+    json_objects1 = recommendations.to_json(orient='records')
+    json_objects_1 = json.loads(json_objects1)
+    # Print the JSON objects
+    # print(json_objects)
+
+    return json_objects_1
 
 def generate_recommendations(creator_df, contributors_df, creator_index, num_recommendations=8):
     # freelancers_df = pd.read_csv(freelancers_df)
@@ -47,15 +44,14 @@ def generate_recommendations(creator_df, contributors_df, creator_index, num_rec
 
 
     # Combine data for freelancers and contributors
-    creator_df["Data"] = creator_df["description"]
+    creator_df["Data"] = creator_df["domain"] + creator_df["level_of_expertise_of_collaborator"] + creator_df["type_of_collaborator"] + creator_df["description"]
     f_df = creator_df[["Data"]]
-    # f_df = creator_df[["Data"]]
 
     
 
-    contributors_df["Data"] = contributors_df["full_name"] + contributors_df["domain"] + contributors_df["branch"] + contributors_df["preferred_language"] + contributors_df["level_of_understanding_of_preferred_language"] + contributors_df["university"] + contributors_df["academic_year"]
+    contributors_df["Data"] = contributors_df["domain"] + contributors_df["level_of_understanding_of_preferred_language"] + contributors_df["preferred_language"]
     c_df = contributors_df[["Data"]]
-    c1_df = contributors_df[["full_name"]]
+    # c1_df = contributors_df[["name"]]
 
     # Create a TF-IDF vectorizer
     tfidf_vectorizer = TfidfVectorizer()
@@ -68,27 +64,39 @@ def generate_recommendations(creator_df, contributors_df, creator_index, num_rec
     cosine_similarities = linear_kernel(creator_profiles, contributor_profiles)
     # Generate recommendations
     similar_contributors_indices = cosine_similarities[creator_index].argsort()[:-num_recommendations-1:-1]
-    recommendations = c1_df.iloc[similar_contributors_indices]
-    result = recommendations['full_name'].tolist()
+    recommendations = contributors_df.iloc[similar_contributors_indices]
+    # print(recommendations)
+    # result = recommendations['name'].tolist()
+    json_objects2 = recommendations.to_json(orient='records')
+    json_objects_2 = json.loads(json_objects2)
+    return json_objects_2
 
-    return result
 
 
-
-def get_recommendations(creator_df, contributors_df, id, contributor_index):
+def get_recommendations(creator_df, contributors_df, email,id):
     index = None  # Initialize index to None to handle the case where id is not found
 
     for i in range(len(creator_df) - 1, -1, -1):
-        if id == creator_df.at[i, "email"]:
+        if email == creator_df.at[i, "email"]:
             index = i
             creator_index = index
-            recommendations = generate_recommendations(creator_df, contributors_df, creator_index)
-            print("If is executed")
-            
-            return recommendations
-
+            recommended_users = generate_recommendations(creator_df, contributors_df, creator_index)
+            # return recommendations_0
+            # print(recommendations_0)
+        
     if index is None:
-        # contributor_index =   # You can set the contributor_index as needed
-        recommendations = generate_user_recommendations(creator_df, contributors_df, contributor_index)
-        print("else is executed")
-        return recommendations
+                # for i in range(len(creator_df) - 1, -1, -1):
+                #     domain = creator_df.at[i, "id"]
+                #     print(domain)
+                    # index = i
+                    # creator_index = index
+                    # recommendations_0 = generate_recommendations(creator_df, contributors_df, creator_index)
+            creator_index = 0
+            recommended_users = generate_recommendations(creator_df, contributors_df, creator_index)
+            # print(recommended_users)
+
+
+    contributor_index = id # You can set the contributor_index as needed
+    recommended_projects = generate_user_recommendations(creator_df, contributors_df, contributor_index)
+    # print(recommendations_1)
+    return recommended_users, recommended_projects

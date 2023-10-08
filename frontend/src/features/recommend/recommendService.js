@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const Recommend = async (detail) => {
+const Recommend = async (id) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  const url =
-    "http://127.0.0.1:8000/recommend/" + detail.id + "/" + detail.domain + "/";
+  const url = "http://127.0.0.1:8000/ML/" + id + "/";
   try {
     const response = await axios.get(url, config);
     return response.data;

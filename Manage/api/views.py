@@ -3,6 +3,7 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from django.http import HttpResponse
 from .models import project
+import json
 from .serializers import ProjectSerializer
 
 from rest_framework.permissions import AllowAny
@@ -45,11 +46,13 @@ class UpdateApiView(APIView):
             return HttpResponse("Default Response")
 
 class UserWithProject(APIView):
+    permission_classes = (AllowAny,)
     def get(self, request, id, format=None):
         try:
             project_instance = project.objects.filter(email=id)
             serializer = ProjectSerializer(project_instance,many=True)
-            return HttpResponse(serializer.data)
+            data=json.dumps(serializer.data)
+            return HttpResponse(data)
         except project.DoesNotExist:
             return HttpResponse({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
     
