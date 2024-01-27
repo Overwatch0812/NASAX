@@ -46,7 +46,7 @@ const Navbar = () => {
         }
       >
         <h1 className="w-full text-4xl font-bold text-[#00df9a]">
-          <Link to="/">NASAX.</Link>
+          <Link to="/">CampusX.</Link>
         </h1>
         <ul className="hidden md:flex  items-center uppercase">
           {user ? (
@@ -206,6 +206,24 @@ const Navbar = () => {
                               )}
                             >
                               My Projects
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to={"/add"}
+                              // onClick={
+                              // 	handleLogout
+                              // }
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              New Project
                             </Link>
                           )}
                         </Menu.Item>

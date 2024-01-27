@@ -6,7 +6,7 @@ const Recommend = async (id) => {
       "Content-Type": "application/json",
     },
   };
-  const url = "http://127.0.0.1:8000/ML/" + id + "/";
+  const url = "http://127.0.0.1:7000/ML/" + id + "/";
   try {
     const response = await axios.get(url, config);
     return response.data;

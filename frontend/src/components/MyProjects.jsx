@@ -7,7 +7,7 @@ export default function MyProjects() {
   const { id } = useParams();
   const [cardData, setCardData] = useState([]);
   async function getCardData() {
-    const url = "http://127.0.0.1:8000/api/projects/" + id + "/";
+    const url = "http://127.0.0.1:7000/api/projects/" + id + "/";
     const res = await fetch(url);
     const data = await res.json();
     setCardData(data);

@@ -33,10 +33,10 @@ export default function AddProject() {
     { value: "Pro", label: "Pro" },
   ];
 
-
   const domains = [
     { value: "AI", label: "AI" },
     { value: "Web Development", label: "Web Development" },
+    { value: "Machine Learning", label: "Machine Learning" },
     { value: "VR", label: "VR" },
     { value: "Android Development", label: "Android Development" },
     { value: "Big Data", label: "Big Data" },
@@ -73,7 +73,6 @@ export default function AddProject() {
   // 	console.log(techstack);
   // };
 
-
   const handleServiceChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...tasks];
@@ -91,7 +90,6 @@ export default function AddProject() {
     setServiceList([...tasks, { service: "" }]);
   };
 
-
   const onSubmit = (e) => {
     e.preventDefault();
     const userData = JSON.stringify({
@@ -105,7 +103,6 @@ export default function AddProject() {
       domain,
       email,
     });
-
 
     // console.log(userData);
     // console.log(usrData);
